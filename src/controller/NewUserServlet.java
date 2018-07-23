@@ -37,15 +37,15 @@ public class NewUserServlet extends HttpServlet {
     	if (isValid(request, messages) == true) {
 
     		User user = new User();
-    		user.setIsStopped(Integer.parseInt(request.getParameter("is_stopped")));
     		user.setAccount(request.getParameter("account"));
     		user.setName(request.getParameter("name"));
     		user.setPassword(request.getParameter("password"));
+    		user.setIsStopped(Integer.parseInt(request.getParameter("is_stopped")));
     		user.setBranchId(Integer.parseInt(request.getParameter("branch_id")));
     		user.setPositionId(Integer.parseInt(request.getParameter("position_id")));
 
     		new UserService().register(user);
-System.out.println(request.getParameter("name"));
+
     		response.sendRedirect("./");
     	} else {
     		session.setAttribute("errorMessages", messages);
@@ -55,21 +55,34 @@ System.out.println(request.getParameter("name"));
     }
 
     private boolean isValid(HttpServletRequest request, List<String> messages) {
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
+    	String account = request.getParameter("account");
+    	String name = request.getParameter("name");
+    	String password = request.getParameter("password");
+    	String branch_id = request.getParameter("branch_id");
+    	String position_id = request.getParameter("position_id");
 
-        if (StringUtils.isEmpty(account) == true) {
-            messages.add("アカウント名を入力してください");
-        }
-        if (StringUtils.isEmpty(password) == true) {
-            messages.add("パスワードを入力してください");
-        }
 
-        if (messages.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    	if (StringUtils.isEmpty(account) == true) {
+    		messages.add("アカウント名を入力してください");
+    	}
+    	if (StringUtils.isEmpty(name) == true) {
+    		messages.add("名前を入力してください");
+    	}
+    	if (StringUtils.isEmpty(password) == true) {
+    		messages.add("パスワードを入力してください");
+    	}
+    	if (StringUtils.isEmpty(branch_id) == true) {
+    		messages.add("支店が選択されていません");
+    	}
+    	if (StringUtils.isEmpty(position_id) == true) {
+    		messages.add("部署・役職が選択されていません");
+    	}
+
+    	if (messages.size() == 0) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
 }

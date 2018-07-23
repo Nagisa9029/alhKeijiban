@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String account;
 	private String name;
@@ -13,10 +13,10 @@ public class User implements Serializable {
 	private int isStopped;
 	private int branchId;
 	private int positionId;
-	private Date CreatedDate;
-	private Date UpdatedDate;
-	
-	
+	private Date createdDate;
+	private Date updatedDate;
+
+
 	public int getId() {
 		return id;
 	}
@@ -60,15 +60,15 @@ public class User implements Serializable {
 		this.positionId = positionId;
 	}
 	public Date getCreatedDate() {
-		return CreatedDate;
+		return createdDate;
 	}
 	public void setCreatedDate(Date createdDate) {
-		CreatedDate = createdDate;
+		this.createdDate = createdDate;
 	}
 	public Date getUpdatedDate() {
-		return UpdatedDate;
+		return updatedDate;
 	}
 	public void setUpdatedDate(Date updatedDate) {
-		UpdatedDate = updatedDate;
+		this.updatedDate = updatedDate;
 	}
 }

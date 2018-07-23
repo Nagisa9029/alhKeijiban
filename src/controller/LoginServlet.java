@@ -1,4 +1,4 @@
-/*package controller;
+package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
+import service.LoginService;
 
 @WebServlet(urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (user != null) {
 			session.setAttribute("loginUser", user);
-			response.sendRedirect("top");
+			response.sendRedirect("index.jsp");
 		} else {
 			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
@@ -45,5 +46,4 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("login");
 		}
 	}
-
-}*/
+}
