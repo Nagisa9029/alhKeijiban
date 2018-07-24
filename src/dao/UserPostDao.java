@@ -21,6 +21,7 @@ public class UserPostDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT ");
+			sql.append("posts.user_id, ");
 			sql.append("posts.id, ");
 			sql.append("posts.title, ");
 			sql.append("posts.text, ");
@@ -61,10 +62,10 @@ public class UserPostDao {
 				UserPost post = new UserPost();
 				post.setName(name);
 				post.setId(id);
-				post.setUserId(userId);
+				post.setUser_id(userId);
 				post.setTitle(title);
-				post.setTitle(text);
-				post.setTitle(category);
+				post.setText(text);
+				post.setCategory(category);
 				post.setCreated_date(createdDate);
 
 				ret.add(post);

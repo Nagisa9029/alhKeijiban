@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.UserPost;
-import service.PostService;
+import beans.IndexUser;
+import service.UserService;
 
-@WebServlet(urlPatterns = { "/index.jsp" })
-public class TopServlet extends HttpServlet {
+
+@WebServlet(urlPatterns = { "/IndexUsers" })
+public class IndexUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		List<IndexUser> users = new UserService().getUser();
+		request.setAttribute("users", users);
 
-		List<UserPost> posts = new PostService().getPost();
-		request.setAttribute("posts",  posts);
-
-		request.getRequestDispatcher("/top.jsp").forward(request, response);
+		request.getRequestDispatcher("/IndexUsers.jsp").forward(request, response);
 	}
-}
 
+}

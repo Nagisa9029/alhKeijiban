@@ -14,17 +14,17 @@
 			<div class="header">
 				<c:if test="${ empty loginUser }">
 					<a href="login">ログイン</a>
-					<a href="newuser">登録する</a>
 				</c:if>
 				<c:if test="${ not empty loginUser }">
-					<a href="newpost">新規投稿</a>
-					<a href="settings">設定</a>
+					<a href="IndexUsers">管理画面</a>
 					<a href="logout">ログアウト</a>
 				</c:if>
 			</div>
 
 			<div class="posts">
 				<c:forEach items="${posts}" var="post">
+
+					<!-- 投稿記事 -->
 					<div class="post">
 						<div class="account-name">
 							<span class="date"><fmt:formatDate value="${post.created_date}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
@@ -33,6 +33,23 @@
 						<div class="title"><c:out value="${post.title}" /></div>
 						<div class="text"><c:out value="${post.text}" /></div>
 						<div class="category"><c:out value="${post.category}" /></div>
+					</div>
+
+					<!-- コメント一覧 -->
+					<c:forEach items="${commens}" var="comment">
+						<div class="comment">
+							<c:out value="${comment.name}" />
+							<c:out value="${comment.text}" />
+						</div>
+					</c:forEach>
+
+					<!-- コメント投稿 -->
+					<div class="form-area">
+						<form action="NewComment" method="post" >
+							<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea><br />
+							<input type="hidden" name="post" value="${post.id}" />
+							<input type="submit" value="コメント" />（500文字まで）
+						</form>
 					</div>
 
 				</c:forEach>

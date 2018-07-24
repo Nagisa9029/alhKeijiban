@@ -1,33 +1,25 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
-
-import beans.User;
-import service.UserService;
-
-@WebServlet(urlPatterns = { "/newuser" })
-public class NewUserServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/IndexUsers/*" })
+public class EditUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request,
     		HttpServletResponse response) throws IOException, ServletException {
 
-    	request.getRequestDispatcher("NewUser.jsp").forward(request, response);
+    	request.getRequestDispatcher("EditUser.jsp").forward(request, response);
     }
 
-    @Override
+/*    @Override
     protected void doPost(HttpServletRequest request,
     		HttpServletResponse response) throws IOException, ServletException {
 
@@ -83,6 +75,6 @@ public class NewUserServlet extends HttpServlet {
     	} else {
     		return false;
     	}
-    }
+    }*/
 
 }

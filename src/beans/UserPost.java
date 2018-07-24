@@ -11,7 +11,7 @@ public class UserPost implements Serializable {
 	private String title;
 	private String text;
 	private String category;
-	private int userId;
+	private int user_id;
 	private Date created_date;
 
 	public int getId() {
@@ -38,22 +38,22 @@ public class UserPost implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getUserId() {
-		return userId;
+	public String getName() {
+		return name;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	public Date getCreated_date() {
 		return created_date;
 	}
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 }

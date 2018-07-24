@@ -6,7 +6,7 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ユーザー登録</title>
+	<title>ユーザー編集</title>
 	</head>
 	<body>
 		<div class="main-contents">
@@ -20,10 +20,11 @@
 				</div>
 				<c:remove var="errorMessages" scope="session" />
             </c:if>
-			<form action="newuser" method="post"><br />
+			<form action="/IndexUsers/5" method="post"><br />
 				<label for="account">ログインID</label> <input name="account" id="account" /> <br />
 				<label for="name">名前</label> <input name="name" id="name" /> <br />
 				<label for="password">パスワード</label> <input name="password" id="password" /> <br />
+				<input type="hidden" name="is_stopped" value="1" />
 				<label for="branch_id">支店</label>
 					<select name="branch_id">
 						<option value="1">本社</option>
@@ -39,7 +40,7 @@
 						<option value="3">店長</option>
 						<option value="4">社員</option>
 					</select><br />
-				<input type="hidden" name="is_stopped" value="1" />
+
 				<input type="submit" value="登録" /> <br />
 				<a href="./">戻る</a>
 			</form>
