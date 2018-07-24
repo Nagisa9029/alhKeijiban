@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.PostUser;
+import beans.UserPost;
 import service.PostService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
@@ -21,7 +21,7 @@ public class TopServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 
-		List<PostUser> posts = new PostService().getPost();
+		List<UserPost> posts = new PostService().getPost();
 		request.setAttribute("post",  posts);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);

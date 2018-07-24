@@ -25,7 +25,7 @@ public class NewPostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		request.getRequestDispatcher("post.jsp").forward(request, response);
+		request.getRequestDispatcher("NewPost.jsp").forward(request, response);
 	}
 
 	@Override

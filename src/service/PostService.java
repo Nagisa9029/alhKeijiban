@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.util.List;
 
 import beans.Post;
-import beans.PostUser;
+import beans.UserPost;
 import dao.PostDao;
-import dao.PostUserDao;
+import dao.UserPostDao;
 
 public class PostService {
 
@@ -36,14 +36,14 @@ public class PostService {
 
 	private static final int LIMIT_NUM = 1000;
 
-	public List<PostUser> getPost() {
+	public List<UserPost> getPost() {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			PostUserDao postDao = new PostUserDao();
-			List<PostUser> ret = postDao.getPostUsers(connection, LIMIT_NUM);
+			UserPostDao postDao = new UserPostDao();
+			List<UserPost> ret = postDao.getUserPosts(connection, LIMIT_NUM);
 
 			commit(connection);
 
