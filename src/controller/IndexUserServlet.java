@@ -13,7 +13,7 @@ import beans.IndexUser;
 import service.UserService;
 
 
-@WebServlet(urlPatterns = { "/IndexUsers" })
+@WebServlet(urlPatterns = { "/users" })
 public class IndexUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

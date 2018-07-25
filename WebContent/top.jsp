@@ -16,7 +16,7 @@
 					<a href="login">ログイン</a>
 				</c:if>
 				<c:if test="${ not empty loginUser }">
-					<a href="IndexUsers">管理画面</a>
+					<a href="users">管理画面</a>
 					<a href="logout">ログアウト</a>
 				</c:if>
 			</div>

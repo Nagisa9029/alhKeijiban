@@ -31,14 +31,23 @@
 					<c:forEach items="${users}" var="user">
 					<tr>
 						<td><c:out value="${user.id}" /></td>
-						<td><a href="IndexUsers/${user.id}">
+						<td><a href="users/${user.id}">
 							<c:out value="${user.name}" /></a>
 						</td>
 						<td><c:out value="${user.account}" /></td>
 						<!--<c:out value="${user.password}" />-->
 						<td><c:out value="${user.branchName}" /></td>
 						<td><c:out value="${user.positionName}" /></td>
-						<td><c:out value="${user.is_stopped}" /></td>
+						<td>
+							<form action="users/${user.id}" method="post"><br />
+								<c:if test="${ user.is_stopped == 1 }">
+									<input type="hidden" name="is_stopped" value="0" />
+									<input type="submit" value="停止" /></c:if>
+								<c:if test="${ user.is_stopped == 0 }">
+									<input type="hidden" name="is_stopped" value="1" />
+									<input type="submit" value="復活" /></c:if>
+							</form>
+						</td>
 					</tr>
 					</c:forEach>
 				</table>
