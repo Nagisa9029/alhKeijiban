@@ -16,6 +16,7 @@
 					<a href="login">ログイン</a>
 				</c:if>
 				<c:if test="${ not empty loginUser }">
+					<a href="newpost">新規投稿</a>
 					<a href="users">管理画面</a>
 					<a href="logout">ログアウト</a>
 				</c:if>
@@ -29,6 +30,9 @@
 						<div class="account-name">
 							<span class="date"><fmt:formatDate value="${post.created_date}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
 							<span class="name"><c:out value="${post.name}" /></span>
+							<c:if test="${loginUser.id == post.user_id}">
+								<input type="submit" value="削除">
+							</c:if>
 						</div>
 						<div class="title"><c:out value="${post.title}" /></div>
 						<div class="text"><c:out value="${post.text}" /></div>
@@ -36,11 +40,17 @@
 					</div>
 
 					<!-- コメント一覧 -->
-					<c:forEach items="${commens}" var="comment">
+					<c:forEach items="${comments}" var="comment">
+					<c:if test="${post.id == comment.postId}">
 						<div class="comment">
+							<c:out value="${comment.postId}" />
 							<c:out value="${comment.name}" />
 							<c:out value="${comment.text}" />
+							<c:if test="${loginUser.id == comment.userId}">
+								<input type="submit" value="削除">
+							</c:if>
 						</div>
+					</c:if>
 					</c:forEach>
 
 					<!-- コメント投稿 -->

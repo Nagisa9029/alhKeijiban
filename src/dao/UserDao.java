@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.User;
+import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
 
 public class UserDao {
@@ -116,6 +117,68 @@ public class UserDao {
 			return ret;
 		} finally {
 			close(rs);
+		}
+	}
+
+	public User getUser(Connection connection, int id) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else if (2 <= userList.size()) {
+				throw new IllegalStateException("2 <= userList.size()");
+			} else {
+				return userList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public void update(Connection connection, User user) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append("  account = ?");
+			sql.append(", name = ?");
+			sql.append(", password = ?");
+			sql.append(", is_stopped = ?");
+			sql.append(", branch_id = ?");
+			sql.append(", position_id = ?");
+			sql.append(", updated_date = CURRENT_TIMESTAMP");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, user.getAccount());
+			ps.setString(2, user.getName());
+			ps.setString(3, user.getPassword());
+			ps.setInt(4, user.getIsStopped());
+			ps.setInt(5, user.getBranchId());
+			ps.setInt(6, user.getPositionId());
+			ps.setInt(7, user.getId());
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
 		}
 	}
 

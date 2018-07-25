@@ -3,12 +3,13 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Comment implements Serializable {
+public class UserComment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String text;
 	private int userId;
+	private String name;
 	private int postId;
 	private Date createdDate;
 	private Date updatedDate;
@@ -48,5 +49,11 @@ public class Comment implements Serializable {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

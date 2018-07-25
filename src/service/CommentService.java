@@ -4,9 +4,12 @@ import static utils.CloseableUtil.*;
 import static utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import beans.Comment;
+import beans.UserComment;
 import dao.CommentDao;
+import dao.UserCommentDao;
 
 public class CommentService {
 
@@ -31,4 +34,28 @@ public class CommentService {
 		}
 	}
 
+	private static final int LIMIT_NUM = 1000;
+
+	public List<UserComment> getComment() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserCommentDao commentDao = new UserCommentDao();
+			List<UserComment> ret = commentDao.getUserComments(connection, LIMIT_NUM);
+
+			commit(connection);
+
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

@@ -31,7 +31,7 @@
 					<c:forEach items="${users}" var="user">
 					<tr>
 						<td><c:out value="${user.id}" /></td>
-						<td><a href="users/${user.id}">
+						<td><a href="edit?id=${user.id}">
 							<c:out value="${user.name}" /></a>
 						</td>
 						<td><c:out value="${user.account}" /></td>
@@ -39,7 +39,7 @@
 						<td><c:out value="${user.branchName}" /></td>
 						<td><c:out value="${user.positionName}" /></td>
 						<td>
-							<form action="users/${user.id}" method="post"><br />
+							<form action="edit" method="post"><br />
 								<c:if test="${ user.is_stopped == 1 }">
 									<input type="hidden" name="is_stopped" value="0" />
 									<input type="submit" value="停止" /></c:if>

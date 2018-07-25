@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserComment;
 import beans.UserPost;
+import service.CommentService;
 import service.PostService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
@@ -23,6 +25,10 @@ public class TopServlet extends HttpServlet {
 
 		List<UserPost> posts = new PostService().getPost();
 		request.setAttribute("posts",  posts);
+		System.out.println(posts);
+		List<UserComment> comments = new CommentService().getComment();
+		request.setAttribute("comments",  comments);
+		System.out.println(comments);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

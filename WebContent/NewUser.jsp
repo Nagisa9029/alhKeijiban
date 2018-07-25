@@ -21,11 +21,15 @@
 				<c:remove var="errorMessages" scope="session" />
             </c:if>
 			<form action="newuser" method="post"><br />
-				<label for="account">ログインID</label> <input name="account" id="account" /> <br />
-				<label for="name">名前</label> <input name="name" id="name" /> <br />
-				<label for="password">パスワード</label> <input name="password" id="password" /> <br />
+				<label for="account">ログインID</label>
+					<input name="account" id="account" /> <br />
+				<label for="name">名前</label>
+					<input name="name" id="name" /> <br />
+				<label for="password">パスワード</label>
+					<input name="password" id="password" /> <br />
 				<label for="branch_id">支店</label>
 					<select name="branch_id">
+						<option></option>
 						<option value="1">本社</option>
 						<option value="2">支店A</option>
 						<option value="3">支店B</option>
@@ -34,6 +38,7 @@
 					</select><br />
 				<label for="position_id">部署・役職</label>
 					<select name="position_id">
+						<option></option>
 						<option value="1">総務人事</option>
 						<option value="2">情報管理</option>
 						<option value="3">店長</option>
