@@ -124,9 +124,28 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE id = ?";
+			StringBuilder sql = new StringBuilder();
+			//String sql = "SELECT * FROM users WHERE id = ?";
+			sql.append("SELECT ");
+			sql.append("users.id, ");
+			sql.append("users.name, ");
+			sql.append("users.account, ");
+			sql.append("users.password, ");
+			sql.append("users.is_stopped, ");
+			sql.append("users.branch_id, ");
+			sql.append("branches.name, ");
+			sql.append("users.position_id, ");
+			sql.append("positions.name, ");
+			sql.append("users.created_date");
+			sql.append("FROM users ");
+			sql.append("INNER JOIN branches ");
+			sql.append("ON users.branch_id = branches.id ");
+			sql.append("INNER JOIN positions ");
+			sql.append("ON users.position_id = positions.id ");
+			sql.append("WHERE users.id = ?");
+			//sql.append("ORDER BY created_date DESC limit " + num);
 
-			ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql.toString());
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();

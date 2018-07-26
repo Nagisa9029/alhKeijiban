@@ -26,6 +26,12 @@ public class UserComment implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -49,11 +55,5 @@ public class UserComment implements Serializable {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 }

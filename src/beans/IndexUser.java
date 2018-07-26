@@ -10,13 +10,13 @@ public class IndexUser implements Serializable {
 	private String account;
 	private String name;
 	private String password;
-	private int is_stopped;
-	private int branch_id;
-	private int position_id;
+	private int isStopped;
+	private int branchId;
+	private int positionId;
 	private String branchName;
 	private String positionName;
-	private Date created_date;
-	private Date updated_date;
+	private Date createdDate;
+	private Date updatedDate;
 
 
 	public int getId() {
@@ -43,36 +43,6 @@ public class IndexUser implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getIs_stopped() {
-		return is_stopped;
-	}
-	public void setIs_stopped(int is_stopped) {
-		this.is_stopped = is_stopped;
-	}
-	public int getBranch_id() {
-		return branch_id;
-	}
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
-	}
-	public int getPosition_id() {
-		return position_id;
-	}
-	public void setPosition_id(int position_id) {
-		this.position_id = position_id;
-	}
-	public Date getCreated_date() {
-		return created_date;
-	}
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
-	}
-	public Date getUpdated_date() {
-		return updated_date;
-	}
-	public void setUpdated_date(Date updated_date) {
-		this.updated_date = updated_date;
-	}
 	public String getPositionName() {
 		return positionName;
 	}
@@ -84,5 +54,35 @@ public class IndexUser implements Serializable {
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
+	}
+	public int getIsStopped() {
+		return isStopped;
+	}
+	public void setIsStopped(int isStopped) {
+		this.isStopped = isStopped;
+	}
+	public int getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+	public int getPositionId() {
+		return positionId;
+	}
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 }

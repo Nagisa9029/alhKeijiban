@@ -55,7 +55,7 @@ public class EditUserServlet extends HttpServlet {
 
 			session.setAttribute("loginUser", editUser);
 
-			response.sendRedirect("./");
+			response.sendRedirect("./users");
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", editUser);

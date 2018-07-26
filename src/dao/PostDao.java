@@ -47,4 +47,21 @@ public class PostDao {
 		}
 	}
 
+	public void delete(Connection connection, Post post) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "DELETE FROM posts WHERE id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, post.getId());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 }

@@ -51,22 +51,22 @@ public class UserPostDao {
 		List<UserPost> ret = new ArrayList<UserPost>();
 		try {
 			while (rs.next()) {
-				String name = rs.getString("name");
-				int id = rs.getInt("id");
-				int userId = rs.getInt("user_id");
-				String title = rs.getString("title");
-				String text = rs.getString("text");
-				String category = rs.getString("category");
-				Timestamp createdDate = rs.getTimestamp("created_date");
+				String name = rs.getString("users.name");
+				int id = rs.getInt("posts.id");
+				int userId = rs.getInt("posts.user_id");
+				String title = rs.getString("posts.title");
+				String text = rs.getString("posts.text");
+				String category = rs.getString("posts.category");
+				Timestamp createdDate = rs.getTimestamp("posts.created_date");
 
 				UserPost post = new UserPost();
 				post.setName(name);
 				post.setId(id);
-				post.setUser_id(userId);
+				post.setUserId(userId);
 				post.setTitle(title);
 				post.setText(text);
 				post.setCategory(category);
-				post.setCreated_date(createdDate);
+				post.setCreatedDate(createdDate);
 
 				ret.add(post);
 			}

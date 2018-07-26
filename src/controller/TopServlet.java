@@ -25,10 +25,9 @@ public class TopServlet extends HttpServlet {
 
 		List<UserPost> posts = new PostService().getPost();
 		request.setAttribute("posts",  posts);
-		System.out.println(posts);
+
 		List<UserComment> comments = new CommentService().getComment();
 		request.setAttribute("comments",  comments);
-		System.out.println(comments);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

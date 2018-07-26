@@ -50,12 +50,12 @@ public class UserCommentDao {
 		List<UserComment> ret = new ArrayList<UserComment>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String text = rs.getString("text");
-				int userId = rs.getInt("user_id");
+				int id = rs.getInt("comments.id");
+				String text = rs.getString("comments.text");
+				int userId = rs.getInt("comments.user_id");
 				String name = rs.getString("users.name");
-				int postId = rs.getInt("post_id");
-				Timestamp createdDate = rs.getTimestamp("created_date");
+				int postId = rs.getInt("comments.post_id");
+				Timestamp createdDate = rs.getTimestamp("comments.created_date");
 
 				UserComment comment = new UserComment();
 				comment.setId(id);

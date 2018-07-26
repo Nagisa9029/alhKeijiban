@@ -40,10 +40,16 @@
 						<td><c:out value="${user.positionName}" /></td>
 						<td>
 							<form action="edit" method="post"><br />
-								<c:if test="${ user.is_stopped == 1 }">
+								<input type="hidden" name="id" value="${user.id}" />
+								<input type="hidden" name="account" value="${user.account}" />
+								<input type="hidden" name="name" value="${user.name}" id="name" />
+								<input type="hidden" name="password" value="${user.password}" />
+								<input type="hidden" name="branch_id" value="${user.branchId}" />
+								<input type="hidden" name="position_id" value="${user.positionId}" />
+								<c:if test="${ user.isStopped == 1 }">
 									<input type="hidden" name="is_stopped" value="0" />
 									<input type="submit" value="停止" /></c:if>
-								<c:if test="${ user.is_stopped == 0 }">
+								<c:if test="${ user.isStopped == 0 }">
 									<input type="hidden" name="is_stopped" value="1" />
 									<input type="submit" value="復活" /></c:if>
 							</form>

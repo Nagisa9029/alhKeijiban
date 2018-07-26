@@ -44,7 +44,7 @@
 						<option value="4">社員</option>
 					</select><br />
 
-				<input type="hidden" name="is_stopped" value="${editUser.isStopped}" id="is_stopped" />
+				<input type="hidden" name="is_stopped" value="${editUser.is_stopped}" id="is_stopped" />
 				<input type="submit" value="登録" /> <br />
 				<a href="./">戻る</a>
 			</form>

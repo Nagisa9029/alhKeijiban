@@ -11,8 +11,8 @@ public class UserPost implements Serializable {
 	private String title;
 	private String text;
 	private String category;
-	private int user_id;
-	private Date created_date;
+	private int userId;
+	private Date createdDate;
 
 	public int getId() {
 		return id;
@@ -44,16 +44,16 @@ public class UserPost implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public Date getCreated_date() {
-		return created_date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 }

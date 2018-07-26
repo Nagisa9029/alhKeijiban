@@ -28,10 +28,13 @@
 					<!-- 投稿記事 -->
 					<div class="post">
 						<div class="account-name">
-							<span class="date"><fmt:formatDate value="${post.created_date}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
+							<span class="date"><fmt:formatDate value="${post.createdDate}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
 							<span class="name"><c:out value="${post.name}" /></span>
-							<c:if test="${loginUser.id == post.user_id}">
-								<input type="submit" value="削除">
+							<c:if test="${loginUser.id == post.userId}">
+								<form action="delete" method="post">
+									<input type="hidden" name="id" value="${post.id}" />
+									<input type="submit" value="投稿削除">
+								</form>
 							</c:if>
 						</div>
 						<div class="title"><c:out value="${post.title}" /></div>
@@ -43,11 +46,14 @@
 					<c:forEach items="${comments}" var="comment">
 					<c:if test="${post.id == comment.postId}">
 						<div class="comment">
-							<c:out value="${comment.postId}" />
+							<c:out value="${comment.id}" />
 							<c:out value="${comment.name}" />
 							<c:out value="${comment.text}" />
 							<c:if test="${loginUser.id == comment.userId}">
-								<input type="submit" value="削除">
+								<form action="DeleteComment" method="post">
+									<input type="hidden" name="id" value="${comment.id}" />
+									<input type="submit" value="コメント削除">
+								</form>
 							</c:if>
 						</div>
 					</c:if>
@@ -58,7 +64,7 @@
 						<form action="NewComment" method="post" >
 							<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea><br />
 							<input type="hidden" name="post" value="${post.id}" />
-							<input type="submit" value="コメント" />（500文字まで）
+							<input type="submit" value="コメント投稿" />（500文字まで）
 						</form>
 					</div>
 
