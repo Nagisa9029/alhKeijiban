@@ -21,10 +21,10 @@
 				<c:remove var="errorMessages" scope="session" />
             </c:if>
 			<form action="newpost" method="post"><br />
-				<label for="title">タイトル</label>（30文字まで）
-					<textarea name="title" cols="100" rows="1"></textarea><br />
-				<label for="text">本文</label>（1000文字まで）
-					<textarea name="text" cols="100" rows="10"></textarea><br />
+				<label for="title">タイトル</label>（30文字まで）<br />
+					<textarea name="title" cols="100" rows="1" required="true"></textarea><br />
+				<label for="text">本文</label>（1000文字まで）<br />
+					<textarea name="text" cols="100" rows="10" required="true"></textarea><br />
 				<label for="category">カテゴリー</label><br />
 					<input name="category" id="category" /> <br />
 

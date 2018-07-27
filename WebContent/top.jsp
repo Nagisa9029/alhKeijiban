@@ -21,9 +21,20 @@
 					<a href="logout">ログアウト</a>
 				</c:if>
 			</div>
+			<hr>
+
+			<form action="index.jsp" method="get">
+			<input type="date" name="date" />～<input type="date" name="date" /><br />
+			<label for="category">カテゴリー</label>
+				<input name="category" id="category" /> <br />
+			<input type="submit" value="検索">
+			</form>
+
 
 			<div class="posts">
 				<c:forEach items="${posts}" var="post">
+				<hr>
+				<hr>
 
 					<!-- 投稿記事 -->
 					<div class="post">
@@ -41,6 +52,7 @@
 						<div class="text"><c:out value="${post.text}" /></div>
 						<div class="category"><c:out value="${post.category}" /></div>
 					</div>
+					<hr>
 
 					<!-- コメント一覧 -->
 					<c:forEach items="${comments}" var="comment">
@@ -67,8 +79,12 @@
 							<input type="submit" value="コメント投稿" />（500文字まで）
 						</form>
 					</div>
-
+					<br />
+					<br />
+					<br />
+					<br />
 				</c:forEach>
+
 			</div>
 			<div class="copyright"> Copyright(c)Takuto Nakamura</div>
 		</div>

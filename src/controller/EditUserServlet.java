@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import beans.IndexUser;
 import beans.User;
 import exception.NoRowsUpdatedRuntimeException;
 import service.UserService;
@@ -26,10 +27,9 @@ public class EditUserServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		Integer ID = Integer.parseInt(request.getParameter("id"));
-		User editUser = new UserService().getUser(ID);
+		List<IndexUser> editUser = new UserService().getShowUser(ID);
 
-		request.setAttribute("editUser", editUser);
-
+		request.setAttribute("editUser", editUser.get(0));
 		request.getRequestDispatcher("EditUser.jsp").forward(request, response);
 	}
 

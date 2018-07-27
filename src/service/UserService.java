@@ -63,18 +63,18 @@ public class UserService {
 		}
 	}
 
-	public User getUser(int userId) {
+	public List<IndexUser> getShowUser(int userId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			UserDao userDao = new UserDao();
-			User user = userDao.getUser(connection, userId);
+			IndexUserDao userDao = new IndexUserDao();
+			List<IndexUser> ret = userDao.getShowUser(connection, userId);
 
 			commit(connection);
 
-			return user;
+			return ret;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

@@ -24,7 +24,14 @@ public class TopServlet extends HttpServlet {
 
 
 		List<UserPost> posts = new PostService().getPost();
+
+
+
+
+
+
 		request.setAttribute("posts",  posts);
+
 
 		List<UserComment> comments = new CommentService().getComment();
 		request.setAttribute("comments",  comments);

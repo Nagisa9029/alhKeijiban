@@ -30,6 +30,7 @@
 					<input name="password" value="${editUser.password}" id="password" /> <br />
 				<label for="branch_id">支店</label>
 					<select name="branch_id">
+						<option value="${editUser.branchId}">${editUser.branchName}</option>
 						<option value="1">本社</option>
 						<option value="2">支店A</option>
 						<option value="3">支店B</option>
@@ -38,13 +39,14 @@
 					</select><br />
 				<label for="position_id">部署・役職</label>
 					<select name="position_id">
+						<option value="${editUser.positionId}">${editUser.positionName}</option>
 						<option value="1">総務人事</option>
 						<option value="2">情報管理</option>
 						<option value="3">店長</option>
 						<option value="4">社員</option>
 					</select><br />
 
-				<input type="hidden" name="is_stopped" value="${editUser.is_stopped}" id="is_stopped" />
+				<input type="hidden" name="is_stopped" value="${editUser.isStopped}" id="is_stopped" />
 				<input type="submit" value="登録" /> <br />
 				<a href="./">戻る</a>
 			</form>
