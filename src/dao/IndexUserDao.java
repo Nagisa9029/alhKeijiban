@@ -30,12 +30,13 @@ public class IndexUserDao {
 			sql.append("branches.name, ");
 			sql.append("users.position_id, ");
 			sql.append("positions.name ");
+			//sql.append("users.created_date");
 			sql.append("FROM users ");
 			sql.append("INNER JOIN branches ");
 			sql.append("ON users.branch_id = branches.id ");
 			sql.append("INNER JOIN positions ");
 			sql.append("ON users.position_id = positions.id; ");
-			//sql.append("ORDER BY created_date DESC limit " + num);
+			//sql.append("ORDER BY users.created_date DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -55,16 +56,16 @@ public class IndexUserDao {
 		List<IndexUser> ret = new ArrayList<IndexUser>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String account = rs.getString("account");
-				String password = rs.getString("password");
-				int isStopped = rs.getInt("is_stopped");
-				int branchId = rs.getInt("branch_id");
-				int positionId = rs.getInt("position_id");
+				int id = rs.getInt("users.id");
+				String name = rs.getString("users.name");
+				String account = rs.getString("users.account");
+				String password = rs.getString("users.password");
+				int isStopped = rs.getInt("users.is_stopped");
+				int branchId = rs.getInt("users.branch_id");
+				int positionId = rs.getInt("users.position_id");
 				String branch = rs.getString("branches.name");
 				String position = rs.getString("positions.name");
-				//Timestamp createdDate = rs.getTimestamp("created_date");
+				//Timestamp createdDate = rs.getTimestamp("users.created_date");
 
 				IndexUser user = new IndexUser();
 				user.setId(id);

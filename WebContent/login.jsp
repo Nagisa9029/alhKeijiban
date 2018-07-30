@@ -5,32 +5,42 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="./css/style.css" rel="stylesheet" type="text/css">
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="./js/jQuery.min.js"></script>
 		<title>ログイン</title>
 	</head>
+
+	<c:import url="header.jsp" />
+
 	<body>
-		<div class="main-contents">
-			<c:if test="${ not empty errorMessage }">
-				<div class="errorMessages">
-					<ul>
-						<c:forEach items="${errorMessages }" var="message">
-							<li><c:out value="${message }" />
-						</c:forEach>
-					</ul>
-				</div>
-				<c:remove var="errorMessages" scope="session" />
-			</c:if>
+		<div class="container">
+			<div class="main-contents">
+				<c:if test="${ not empty errorMessage }">
+					<div class="errorMessages">
+						<ul>
+							<c:forEach items="${errorMessages }" var="message">
+								<li><c:out value="${message }" />
+							</c:forEach>
+						</ul>
+					</div>
+					<c:remove var="errorMessages" scope="session" />
+				</c:if>
 
-			<form action="login" method="post"><br />
-				<label for="account">アカウント名</label>
-				<input name="account" id="account"/><br />
+				<form action="login" method="post"><br />
+					<label for="account">アカウント名</label>
+					<input name="account" id="account"/><br />
 
-				<label for="password">パスワード</label>
-				<input name="password" type="password" id="password" /><br />
+					<label for="password">パスワード</label>
+					<input name="password" type="password" id="password" /><br />
 
-				<input type="submit" value="ログイン" /><br />
-				<a href="./">戻る</a>
-			</form>
-			<div class="copyright"> Copyright(c)Takuto Nakamura</div>
+					<input type="submit" value="ログイン" /><br />
+					<a href="./">戻る</a>
+				</form>
+			</div>
 		</div>
 	</body>
+
+	<c:import url="footer.jsp" />
+
 </html>

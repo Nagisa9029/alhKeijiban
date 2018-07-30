@@ -15,7 +15,7 @@ import exception.SQLRuntimeException;
 
 public class UserPostDao {
 
-	public List<UserPost> getUserPosts(Connection connection, int num) {
+	public List<UserPost> getUserPosts(Connection connection, String dateStr, String dateEnd, String category, int num) {
 
 		PreparedStatement ps = null;
 		try {
@@ -31,6 +31,11 @@ public class UserPostDao {
 			sql.append("FROM posts ");
 			sql.append("INNER JOIN users ");
 			sql.append("ON posts.user_id = users.id ");
+			if (category == null ) {
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + "' AND '" + dateEnd + "'" );
+			} else {
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + "' AND '" + dateEnd + "' AND posts.category LIKE '%" + category + "%' ");
+			}
 			sql.append("ORDER BY created_date DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());

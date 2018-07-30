@@ -14,17 +14,19 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter(urlPatterns={"/index.jsp", "/users", "/newuser", "/newpost", "/edituser"})
-public class LoginFilter implements Filter{
+@WebFilter(urlPatterns={"/users", "/newuser", "/edituser"})
+public class BranchPositionFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,ServletException{
 
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
+		Integer branch = loginUser.getBranchId();
+		Integer position = loginUser.getPositionId();
 
-		if(loginUser != null){
+		if(branch == 1 && position == 1){
 			chain.doFilter(request, response);
 		}else{
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 	}
 
