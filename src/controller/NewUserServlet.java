@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Branch;
+import beans.Position;
 import beans.User;
 import service.BranchService;
+import service.PositionService;
 import service.UserService;
 
 @WebServlet(urlPatterns = { "/newuser" })
@@ -26,7 +28,10 @@ public class NewUserServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Branch> branches = new BranchService().getBranch();
-		request.setAttribute("branchets",  branches);
+		request.setAttribute("branches",  branches);
+
+		List<Position> positions = new PositionService().getPosition();
+		request.setAttribute("positions", positions);
 
 		request.getRequestDispatcher("NewUser.jsp").forward(request, response);
 	}
