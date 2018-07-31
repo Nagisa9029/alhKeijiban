@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
-
 import beans.Post;
 import beans.User;
 import service.PostService;
@@ -60,21 +58,27 @@ public class NewPostServlet extends HttpServlet {
 		String text = request.getParameter("text");
 		String category = request.getParameter("category");
 
-		if (StringUtils.isEmpty(title) == true) {
-			messages.add("タイトルを入力してください");
-		}
 		if (30 < title.length()) {
 			messages.add("タイトルは30文字以下で入力してください");
 		}
-		if (StringUtils.isEmpty(text) == true) {
-			messages.add("本文を入力してください");
+		if (10 < category.length()) {
+			messages.add("カテゴリーは10文字以下で入力してください");
 		}
 		if (1000 < text.length()) {
 			messages.add("本文は1000文字以下で入力してください");
 		}
+
+		/*if (StringUtils.isEmpty(title) == true) {
+			messages.add("タイトルを入力してください");
+		}
+
+		if (StringUtils.isEmpty(text) == true) {
+			messages.add("本文を入力してください");
+		}
 		if (StringUtils.isEmpty(category) == true) {
 			messages.add("カテゴリーを入力してください");
-		}
+		}*/
+
 		if (messages.size() == 0) {
 			return true;
 		} else {

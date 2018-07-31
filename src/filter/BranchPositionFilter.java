@@ -20,13 +20,15 @@ public class BranchPositionFilter implements Filter{
 
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
-		Integer branch = loginUser.getBranchId();
-		Integer position = loginUser.getPositionId();
 
-		if(branch == 1 && position == 1){
-			chain.doFilter(request, response);
+		if(loginUser != null){
+			if (loginUser.getBranchId() == 1 && loginUser.getPositionId() == 1){
+				chain.doFilter(request, response);
+			}else{
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}
 		}else{
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/login").forward(request, response);
 		}
 	}
 

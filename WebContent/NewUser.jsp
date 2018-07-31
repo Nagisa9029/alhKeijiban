@@ -16,6 +16,10 @@
 
 	<body>
 		<div class="container">
+			<h1>新規ユーザー登録</h1>
+			<hr>
+			<a href="./">戻る</a>
+
 			<div class="main-contents">
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
@@ -27,8 +31,54 @@
 					</div>
 					<c:remove var="errorMessages" scope="session" />
 				</c:if>
+
 				<form action="newuser" method="post"><br />
-					<label for="account">ログインID</label>
+					<table class="table">
+						<tr>
+							<th>ログインID</th>
+							<td><input name="account" id="account" required="true" size="50" value="${user.account}" /></td>
+						</tr>
+						<tr>
+							<th>名前</th>
+							<td><input name="name" id="name" required="true" size="50" /></td>
+						</tr>
+						<tr>
+							<th>パスワード</th>
+							<td><input name="password" id="password" required="true" size="50" /></td>
+						</tr>
+						<tr>
+							<th>パスワード(確認用)</th>
+							<td><input name="passwordTest" id="passwordTest" required="true" size="50" /></td>
+						</tr>
+						<tr>
+							<th>支店</th>
+							<td><select name="branch_id" required="true">
+									<option></option>
+									<option value="1">本社</option>
+									<option value="2">支店A</option>
+									<option value="3">支店B</option>
+									<option value="4">支店C</option>
+									<option value="5">支店D</option>
+							</select></td>
+						</tr>
+						<tr>
+							<th>部署・役職</th>
+							<td><select name="position_id" required="true">
+									<option></option>
+									<option value="1">総務人事</option>
+									<option value="2">情報管理</option>
+									<option value="3">店長</option>
+									<option value="4">社員</option>
+							</select></td>
+						</tr>
+					</table>
+					<input type="hidden" name="is_stopped" value="1" />
+					<button type="submit" class="btn btn-primary">登録</button>
+				</form>
+
+
+
+					<!-- <label for="account">ログインID</label>
 						<input name="account" id="account" required="true" /> <br />
 					<label for="name">名前</label>
 						<input name="name" id="name" required="true" /> <br />
@@ -54,8 +104,10 @@
 					<input type="hidden" name="is_stopped" value="1" />
 					<input type="submit" value="登録" /> <br />
 					<a href="./">戻る</a>
-				</form>
-				<div class="copyright">Copyright(c)Takuto Nakamura</div>
+				</form>-->
+
+
+
 			</div>
 		</div>
 	</body>

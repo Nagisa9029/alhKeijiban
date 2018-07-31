@@ -16,6 +16,9 @@
 
 	<body>
 		<div class="container">
+			<h1>掲示板</h1>
+			<hr>
+
 			<div class="main-contents">
 				<div class="header">
 					<c:if test="${ empty loginUser }">
@@ -36,24 +39,6 @@
 					<input type="submit" value="検索">
 				</form>
 
-
-
-			<div class="collapse navbar-collapse" id="navbarEexample3">
-				<ul class="nav navbar-nav">
-					<li><a href="#">メニューＡ</a></li>
-					<li class="active"><a href="#">メニューＢ</a></li>
-					<li><a href="#">メニューＣ</a></li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="検索キーワード">
-					</div>
-					<button type="submit" class="btn btn-default">検索</button>
-				</form>
-			</div>
-
-
-
 				<div class="posts">
 					<c:forEach items="${posts}" var="post">
 					<hr>
@@ -71,9 +56,10 @@
 									</form>
 								</c:if>
 							</div>
-							<div class="title"><c:out value="${post.title}" /></div>
-							<div class="text"><c:out value="${post.text}" /></div>
-							<div class="category"><c:out value="${post.category}" /></div>
+							<div class="title">タイトル：<c:out value="${post.title}" /></div>
+							<div class="category">カテゴリー：<c:out value="${post.category}" /></div>
+							<div class="text">本文：<c:out value="${post.text}" /></div>
+
 						</div>
 						<hr>
 
@@ -99,7 +85,7 @@
 							<form action="NewComment" method="post" >
 								<textarea name="text" cols="100" rows="5" class="tweet-box" required="true"></textarea><br />
 								<input type="hidden" name="post" value="${post.id}" />
-								<input type="submit" value="コメント投稿" />（500文字まで）
+								<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）
 							</form>
 						</div>
 						<br />

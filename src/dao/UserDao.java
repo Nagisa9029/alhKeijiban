@@ -125,26 +125,33 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE users SET");
-			sql.append("  account = ?");
-			sql.append(", name = ?");
-			sql.append(", password = ?");
-			sql.append(", is_stopped = ?");
-			sql.append(", branch_id = ?");
-			sql.append(", position_id = ?");
-			sql.append(", updated_date = CURRENT_TIMESTAMP");
-			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append("UPDATE users SET ");
+			sql.append("account = ?, ");
+			sql.append("name = ?, ");
+			sql.append("is_stopped = ?, ");
+			sql.append("branch_id = ?, ");
+			sql.append("position_id = ?, ");
+			if(user.getPassword() != null){
+				sql.append("password = ?, ");
+			}
+			System.out.println(user.getPassword());
+			sql.append("updated_date = CURRENT_TIMESTAMP ");
+			sql.append("WHERE ");
+			sql.append("id = ? ");
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, user.getAccount());
 			ps.setString(2, user.getName());
-			ps.setString(3, user.getPassword());
-			ps.setInt(4, user.getIsStopped());
-			ps.setInt(5, user.getBranchId());
-			ps.setInt(6, user.getPositionId());
-			ps.setInt(7, user.getId());
+			ps.setInt(3, user.getIsStopped());
+			ps.setInt(4, user.getBranchId());
+			ps.setInt(5, user.getPositionId());
+			if(user.getPassword() != null){
+				ps.setString(6, user.getPassword());
+				ps.setInt(7, user.getId());
+			}else{
+				ps.setInt(6, user.getId());
+			}
 
 			int count = ps.executeUpdate();
 			if (count == 0) {

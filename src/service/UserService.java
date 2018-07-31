@@ -91,9 +91,16 @@ public class UserService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
+			System.out.println(user.getPassword());
 
-			String encPassword = CipherUtil.encrypt(user.getPassword());
-			user.setPassword(encPassword);
+			if (user.getPassword().length() ==0 ){
+				user.setPassword(null);
+			}else{
+				String encPassword = CipherUtil.encrypt(user.getPassword());
+				user.setPassword(encPassword);
+			}
+			//String encPassword = CipherUtil.encrypt(user.getPassword());
+			//user.setPassword(encPassword);
 
 			UserDao userDao = new UserDao();
 			userDao.update(connection, user);

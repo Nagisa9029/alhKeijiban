@@ -15,6 +15,10 @@
 
 	<body>
 		<div class="container">
+			<h1>新規投稿</h1>
+			<hr>
+			<a href="./">戻る</a>
+
 			<div class="main-contents">
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
@@ -26,17 +30,37 @@
 					</div>
 					<c:remove var="errorMessages" scope="session" />
 				</c:if>
+
 				<form action="newpost" method="post"><br />
-					<label for="title">タイトル</label>（30文字まで）<br />
+					<table>
+						<tr>
+							<th>タイトル</th>
+							<td><textarea name="title" cols="100" rows="1" required="true"></textarea></td>
+						</tr>
+						<tr>
+							<th>カテゴリー</th>
+							<td><input name="category" id="category" /></td>
+						</tr>
+						<tr>
+							<th>本文</th>
+							<td><textarea name="text" cols="100" rows="10" required="true"></textarea></td>
+						</tr>
+					</table>
+					<button type="submit" class="btn btn-primary">新規投稿</button>
+				</form>
+
+
+
+					<!-- <label for="title">タイトル</label>（30文字まで）<br />
 						<textarea name="title" cols="100" rows="1" required="true"></textarea><br />
 					<label for="text">本文</label>（1000文字まで）<br />
 						<textarea name="text" cols="100" rows="10" required="true"></textarea><br />
 					<label for="category" required="true">カテゴリー</label><br />
 						<input name="category" id="category" /> <br />
-
 						<input type="submit" value="登録" /> <br />
-					<a href="./">戻る</a>
-				</form>
+				</form>-->
+
+
 			</div>
 		</div>
 	</body>

@@ -97,7 +97,7 @@ public class IndexUserDao {
 			sql.append("users.id, ");
 			sql.append("users.name, ");
 			sql.append("users.account, ");
-			sql.append("users.password, ");
+			//sql.append("users.password, ");
 			sql.append("users.is_stopped, ");
 			sql.append("users.branch_id, ");
 			sql.append("branches.name, ");
@@ -133,7 +133,7 @@ public class IndexUserDao {
 				int id = rs.getInt("users.id");
 				String name = rs.getString("users.name");
 				String account = rs.getString("users.account");
-				String password = rs.getString("users.password");
+				//String password = rs.getString("users.password");
 				int isStopped = rs.getInt("users.is_stopped");
 				int branchId = rs.getInt("users.branch_id");
 				int positionId = rs.getInt("users.position_id");
@@ -146,7 +146,7 @@ public class IndexUserDao {
 				user.setId(id);
 				user.setName(name);
 				user.setAccount(account);
-				user.setPassword(password);
+				//user.setPassword(password);
 				user.setIsStopped(isStopped);
 				user.setBranchId(branchId);
 				user.setPositionId(positionId);

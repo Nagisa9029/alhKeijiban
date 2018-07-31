@@ -15,9 +15,12 @@
 
 	<body>
 		<div class="container">
+			<h1>ユーザー一覧</h1>
+			<hr>
+			<a href="./">戻る</a>
+
 			<div class="main-contents">
 				<div class="header">
-					<a href="./">戻る</a>
 					<a href="newuser">ユーザー新規登録</a>
 					<a href="logout">ログアウト</a>
 				</div>
@@ -31,7 +34,7 @@
 								<th>アカウント</th>
 								<th>支店</th>
 								<th>部署・役職</th>
-								<th>アカウント発効日</th>
+								<th></th>
 								<th>アカウント状況</th>
 							</tr>
 						</thead>
@@ -52,15 +55,15 @@
 											<input type="hidden" name="id" value="${user.id}" />
 											<input type="hidden" name="account" value="${user.account}" />
 											<input type="hidden" name="name" value="${user.name}" id="name" />
-											<input type="hidden" name="password" value="${user.password}" />
+											<input type="hidden" name="password" value="" />
 											<input type="hidden" name="branch_id" value="${user.branchId}" />
 											<input type="hidden" name="position_id" value="${user.positionId}" />
 											<c:if test="${ user.isStopped == 1 }">
 												<input type="hidden" name="is_stopped" value="0" />
-												<input type="submit" value="停止" /></c:if>
+												<button type="submit" class="btn btn-success">停止</button></c:if>
 											<c:if test="${ user.isStopped == 0 }">
 												<input type="hidden" name="is_stopped" value="1" />
-												<input type="submit" value="復活" /></c:if>
+												<button type="submit" class="btn btn-default">復活</button></c:if>
 										</form>
 									</td>
 								</tr>

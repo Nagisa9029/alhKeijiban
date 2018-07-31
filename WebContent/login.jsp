@@ -7,6 +7,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/bootstrap-theme.min.css">
+		<link href="./fonts/glyphicons-halflings-regular.eot">
+		<link href="./fonts/glyphicons-halflings-regular.woff">
+		<link href="./fonts/glyphicons-halflings-regular.woff2">
 		<script type="text/javascript" src="./js/jQuery.min.js"></script>
 		<title>ログイン</title>
 	</head>
@@ -15,6 +19,9 @@
 
 	<body>
 		<div class="container">
+			<h1 style="text-align: center;">Login</h1>
+			<hr>
+
 			<div class="main-contents">
 				<c:if test="${ not empty errorMessage }">
 					<div class="errorMessages">
@@ -27,16 +34,16 @@
 					<c:remove var="errorMessages" scope="session" />
 				</c:if>
 
-				<form action="login" method="post"><br />
-					<label for="account">アカウント名</label>
-					<input name="account" id="account"/><br />
+				<div class="login-box">
+					<form action="login" method="post"><br />
+					<label for="account">アカウント名</label><br />
+					<input name="account" id="account" size="50" /><br />
 
-					<label for="password">パスワード</label>
-					<input name="password" type="password" id="password" /><br />
-
-					<input type="submit" value="ログイン" /><br />
-					<a href="./">戻る</a>
-				</form>
+					<label for="password">パスワード</label><br />
+					<input name="password" type="password" id="password" size="50" /><br />
+					<button type="submit" class="btn btn-primary">ログイン</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>

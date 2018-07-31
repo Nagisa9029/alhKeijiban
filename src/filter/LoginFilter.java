@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter(urlPatterns={"/index.jsp", "/users", "/newuser", "/newpost", "/edituser"})
+@WebFilter(urlPatterns={"/index.jsp"})
 public class LoginFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,ServletException{
 
@@ -24,7 +24,7 @@ public class LoginFilter implements Filter{
 		if(loginUser != null){
 			chain.doFilter(request, response);
 		}else{
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/login").forward(request, response);
 		}
 	}
 
