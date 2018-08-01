@@ -13,13 +13,11 @@ import beans.Branch;
 import exception.SQLRuntimeException;
 
 public class BranchDao {
-
 	public List<Branch> getBranches(Connection connection, int num) {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM branches";
-			//sql.append("ORDER BY users.created_date DESC limit " + num);
+			String sql = "SELECT * FROM branches ORDER BY id";
 
 			ps = connection.prepareStatement(sql);
 
@@ -41,12 +39,11 @@ public class BranchDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				//Timestamp createdDate = rs.getTimestamp("users.created_date");
-				//Timestamp updatedDate = rs.getTimestamp("users.updated_date");
 
 				Branch branch = new Branch();
 				branch.setId(id);
 				branch.setName(name);
+
 
 				ret.add(branch);
 			}
@@ -55,4 +52,5 @@ public class BranchDao {
 			close(rs);
 		}
 	}
+
 }

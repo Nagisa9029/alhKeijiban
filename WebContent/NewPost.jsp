@@ -34,32 +34,23 @@
 				<form action="newpost" method="post"><br />
 					<table>
 						<tr>
-							<th>タイトル</th>
+							<th>タイトル<br />
+								（30文字まで）</th>
 							<td><textarea name="title" cols="100" rows="1" required="true"></textarea></td>
 						</tr>
 						<tr>
-							<th>カテゴリー</th>
+							<th>カテゴリー<br />
+								（10文字まで）</th>
 							<td><input name="category" id="category" /></td>
 						</tr>
 						<tr>
-							<th>本文</th>
+							<th>本文<br />
+							（1000文字まで）</th>
 							<td><textarea name="text" cols="100" rows="10" required="true"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-primary">新規投稿</button>
 				</form>
-
-
-
-					<!-- <label for="title">タイトル</label>（30文字まで）<br />
-						<textarea name="title" cols="100" rows="1" required="true"></textarea><br />
-					<label for="text">本文</label>（1000文字まで）<br />
-						<textarea name="text" cols="100" rows="10" required="true"></textarea><br />
-					<label for="category" required="true">カテゴリー</label><br />
-						<input name="category" id="category" /> <br />
-						<input type="submit" value="登録" /> <br />
-				</form>-->
-
 
 			</div>
 		</div>

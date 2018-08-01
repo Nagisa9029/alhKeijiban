@@ -16,6 +16,28 @@ import exception.SQLRuntimeException;
 
 public class UserDao {
 
+	public boolean getUser(Connection connection, String account) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE account = '" + account + "'";
+
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+
+			if(userList.size() == 0){
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public void insert(Connection connection, User user) {
 
 		PreparedStatement ps = null;

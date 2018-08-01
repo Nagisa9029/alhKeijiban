@@ -10,7 +10,7 @@ import beans.Position;
 import dao.PositionDao;
 
 public class PositionService {
-	private static final int LIMIT_NUM = 100;
+	private static final int LIMIT_NUM = 1000;
 
 	public List<Position> getPosition() {
 
@@ -18,8 +18,8 @@ public class PositionService {
 		try {
 			connection = getConnection();
 
-			PositionDao userDao = new PositionDao();
-			List<Position> ret = PositionDao.getPositions(connection, LIMIT_NUM);
+			PositionDao positionDao = new PositionDao();
+			List<Position> ret = positionDao.getPositions(connection, LIMIT_NUM);
 
 			commit(connection);
 
@@ -34,5 +34,4 @@ public class PositionService {
 			close(connection);
 		}
 	}
-
 }

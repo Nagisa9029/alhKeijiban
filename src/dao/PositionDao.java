@@ -18,8 +18,7 @@ public class PositionDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM positions";
-			//sql.append("ORDER BY users.created_date DESC limit " + num);
+			String sql = "SELECT * FROM positions ORDER BY id";
 
 			ps = connection.prepareStatement(sql);
 

@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Branch;
 import beans.IndexUser;
+import beans.Position;
 import beans.User;
 import exception.NoRowsUpdatedRuntimeException;
+import service.BranchService;
+import service.PositionService;
 import service.UserService;
 
 @WebServlet(urlPatterns = { "/edit" })
@@ -27,6 +31,12 @@ public class EditUserServlet extends HttpServlet {
 
 		Integer ID = Integer.parseInt(request.getParameter("id"));
 		List<IndexUser> editUser = new UserService().getShowUser(ID);
+
+		List<Branch> branches = new BranchService().getBranch();
+		request.setAttribute("branches",  branches);
+
+		List<Position> positions = new PositionService().getPosition();
+		request.setAttribute("positions", positions);
 
 		request.setAttribute("editUser", editUser.get(0));
 		request.getRequestDispatcher("EditUser.jsp").forward(request, response);
@@ -58,6 +68,12 @@ public class EditUserServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", editUser);
+			List<Branch> branches = new BranchService().getBranch();
+			request.setAttribute("branches",  branches);
+
+			List<Position> positions = new PositionService().getPosition();
+			request.setAttribute("positions", positions);
+
 			request.getRequestDispatcher("EditUser.jsp").forward(request, response);
 		}
 	}
@@ -87,19 +103,21 @@ public class EditUserServlet extends HttpServlet {
 		Integer position_id = Integer.parseInt(request.getParameter("position_id"));
 		String patternA = "^[\\w]+$" ;
 		String patternB = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]";
+		//boolean CheckAccount = new UserService().getUser(account);
 
-
-		if (account == null) {
-			messages.add("このアカウント名は既に使用されています");
-		}
+		//if(CheckAccount == false){
+		//	messages.add("このアカウント名は既に使用されています");
+		//}
 		if ( account.length() < 6 || 20 < account.length() || !Pattern.compile(patternA).matcher(account).find()) {
 			messages.add("アカウントは半角英数字、6文字以上20文字以下で入力してください");
 		}
 		if (10 < name.length()) {
 			messages.add("名前は10文字以下で入力してください");
 		}
-		if (password.length() < 6 ||  20 < password.length() || !Pattern.compile(patternB).matcher(account).find()) {
-			messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
+		if (password.length() != 0) {
+			if (password.length() < 6 ||  20 < password.length() || !Pattern.compile(patternB).matcher(account).find()) {
+				messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
+			}
 		}
 		//if (password != passwordTest) {
 		//	messages.add("パスワードと確認用パスワードが一致していません");

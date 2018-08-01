@@ -26,12 +26,13 @@ public class TopServlet extends HttpServlet {
 		String dateEnd = "2020-12-31";
 		String category = null;
 
-
-		if (request.getParameter("dateStr") != null) {
-			dateStr = request.getParameter("dateStr");
-		}
-		if (request.getParameter("dateEnd") != null) {
-			dateEnd = request.getParameter("dateEnd");
+		if(request.getParameter("dateStr") != null && request.getParameter("dateEnd") != null){
+			if (request.getParameter("dateStr").length() != 0) {
+				dateStr = request.getParameter("dateStr");
+			}
+			if (request.getParameter("dateEnd").length() != 0) {
+				dateEnd = request.getParameter("dateEnd");
+			}
 		}
 		if (request.getParameter("category") != null) {
 			category = request.getParameter("category");

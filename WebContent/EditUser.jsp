@@ -17,7 +17,7 @@
 		<div class="container">
 			<h1>ユーザー情報編集</h1>
 			<hr>
-			<a href="./">戻る</a>
+			<a href="users">戻る</a>
 
 			<div class="main-contents">
 				<c:if test="${ not empty errorMessages }">
@@ -35,39 +35,51 @@
 					<table class="table">
 						<tr>
 							<th>ログインID</th>
-							<td><input name="account" value="${editUser.account}" id="account" required="true" size="50" /></td>
+							<td><input name="account" value="${editUser.account}" id="account" required="true" size="50" /> (半角英数)<br />
+								※6文字以上、20文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>名前</th>
-							<td><input name="name" value="${editUser.name}" id="name" required="true" size="50" /></td>
+							<td><input name="name" value="${editUser.name}" id="name" required="true" size="50" /><br />
+								※10文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>パスワード</th>
-							<td><input name="password" value="" id="password" size="50" /></td>
+							<td><input name="password" value="" id="password" size="50" />(記号を含む半角英数)<br />
+								※6文字以上20文字以下で設定してください</td>
 						</tr>
 						<tr>
-							<th>パスワード(確認用)</th>
+							<th>パスワード（確認用）</th>
 							<td><input name="passwordTest" value="" id="passwordTest" size="50" /></td>
 						</tr>
 						<tr>
 							<th>支店</th>
 							<td><select name="branch_id" required="true">
 									<option value="${editUser.branchId}"></option>
-									<option value="1">本社</option>
-									<option value="2">支店A</option>
-									<option value="3">支店B</option>
-									<option value="4">支店C</option>
-									<option value="5">支店D</option>
+									<option></option>
+									<c:forEach items="${branches}" var="branch">
+										<c:if test="${editUser.branchId == branch.id }">
+											<option value="${branch.id}" selected>${branch.name}</option>
+										</c:if>
+										<c:if test="${editUser.branchId != branch.id }">
+											<option value="${branch.id}">${branch.name}</option>
+										</c:if>
+									</c:forEach>
 							</select></td>
 						</tr>
 						<tr>
 							<th>部署・役職</th>
 							<td><select name="position_id" required="true">
 									<option value="${editUser.positionId}"></option>
-									<option value="1">総務人事</option>
-									<option value="2">情報管理</option>
-									<option value="3">店長</option>
-									<option value="4">社員</option>
+									<c:forEach items="${positions}" var="position">
+										<c:if test="${editUser.positionId == position.id }">
+											<option value="${position.id}" selected>${position.name}</option>
+										</c:if>
+										<c:if test="${editUser.positionId != position.id }">
+											<option value="${position.id}">${position.name}</option>
+										</c:if>
+
+									</c:forEach>
 							</select></td>
 						</tr>
 					</table>

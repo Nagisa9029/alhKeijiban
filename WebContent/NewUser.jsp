@@ -18,7 +18,7 @@
 		<div class="container">
 			<h1>新規ユーザー登録</h1>
 			<hr>
-			<a href="./">戻る</a>
+			<a href="users">戻る</a>
 
 			<div class="main-contents">
 				<c:if test="${ not empty errorMessages }">
@@ -36,77 +36,45 @@
 					<table class="table">
 						<tr>
 							<th>ログインID</th>
-							<td><input name="account" id="account" required="true" size="50" value="${user.account}" /></td>
+							<td><input name="account" id="account" required="true" size="50" value="${user.account}" />（半角英数）<br />
+								※6文字以上、20文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>名前</th>
-							<td><input name="name" id="name" required="true" size="50" /></td>
+							<td><input name="name" id="name" required="true" size="50" value="${user.name}" /><br />
+								※10文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>パスワード</th>
-							<td><input name="password" id="password" required="true" size="50" /></td>
+							<td><input name="password" id="password" required="true" size="50" />（記号を含む半角英数）<br />
+								※6文字以上20文字以下で設定してください</td>
 						</tr>
 						<tr>
-							<th>パスワード(確認用)</th>
+							<th>パスワード（確認用）</th>
 							<td><input name="passwordTest" id="passwordTest" required="true" size="50" /></td>
 						</tr>
 						<tr>
 							<th>支店</th>
 							<td><select name="branch_id" required="true">
 									<option></option>
-									<option value="1">本社</option>
-									<option value="2">支店A</option>
-									<option value="3">支店B</option>
-									<option value="4">支店C</option>
-									<option value="5">支店D</option>
+									<c:forEach items="${branches}" var="branch">
+										<option value="${branch.id}">${branch.name}</option>
+									</c:forEach>
 							</select></td>
 						</tr>
 						<tr>
 							<th>部署・役職</th>
 							<td><select name="position_id" required="true">
 									<option></option>
-									<option value="1">総務人事</option>
-									<option value="2">情報管理</option>
-									<option value="3">店長</option>
-									<option value="4">社員</option>
+									<c:forEach items="${positions}" var="position">
+										<option value="${position.id}">${position.name}</option>
+									</c:forEach>
 							</select></td>
 						</tr>
 					</table>
 					<input type="hidden" name="is_stopped" value="1" />
 					<button type="submit" class="btn btn-primary">登録</button>
 				</form>
-
-
-
-					<!-- <label for="account">ログインID</label>
-						<input name="account" id="account" required="true" /> <br />
-					<label for="name">名前</label>
-						<input name="name" id="name" required="true" /> <br />
-					<label for="password">パスワード</label>
-						<input name="password" id="password" required="true" /> <br />
-					<label for="branch_id">支店</label>
-						<select name="branch_id" required="true">
-							<option></option>
-							<option value="1">本社</option>
-							<option value="2">支店A</option>
-							<option value="3">支店B</option>
-							<option value="4">支店C</option>
-							<option value="5">支店D</option>
-						</select><br />
-					<label for="position_id">部署・役職</label>
-						<select name="position_id" required="true">
-							<option></option>
-							<option value="1">総務人事</option>
-							<option value="2">情報管理</option>
-							<option value="3">店長</option>
-							<option value="4">社員</option>
-						</select><br />
-					<input type="hidden" name="is_stopped" value="1" />
-					<input type="submit" value="登録" /> <br />
-					<a href="./">戻る</a>
-				</form>-->
-
-
 
 			</div>
 		</div>

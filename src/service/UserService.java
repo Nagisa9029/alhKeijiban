@@ -14,6 +14,29 @@ import utils.CipherUtil;
 
 public class UserService {
 
+	public boolean getUser(String userAccount) {
+
+	    Connection connection = null;
+	    try {
+	        connection = getConnection();
+
+	        UserDao userDao = new UserDao();
+	        boolean accountCheck = userDao.getUser(connection, userAccount);
+
+	        commit(connection);
+
+	        return accountCheck;
+	    } catch (RuntimeException e) {
+	        rollback(connection);
+	        throw e;
+	    } catch (Error e) {
+	        rollback(connection);
+	        throw e;
+	    } finally {
+	        close(connection);
+	    }
+	}
+
 	public void register(User user) {
 
 		Connection connection = null;

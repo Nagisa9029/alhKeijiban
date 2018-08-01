@@ -79,9 +79,12 @@ public class NewUserServlet extends HttpServlet {
 		Integer position_id = Integer.parseInt(request.getParameter("position_id"));
 		String patternA = "^[\\w]+$" ;
 		String patternB = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]";
+		boolean CheckAccount = new UserService().getUser(account);
 
+		System.out.println(password);
+		System.out.println(passwordTest);
 
-		if (account == null) {
+		if(CheckAccount == false){
 			messages.add("このアカウント名は既に使用されています");
 		}
 		if ( account.length() < 6 || 20 < account.length() || !Pattern.compile(patternA).matcher(account).find()) {
@@ -93,9 +96,9 @@ public class NewUserServlet extends HttpServlet {
 		if (password.length() < 6 ||  20 < password.length() || !Pattern.compile(patternB).matcher(account).find()) {
 			messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
 		}
-		//if (password != passwordTest) {
-		//	messages.add("パスワードと確認用パスワードが一致していません");
-		//}
+		if (password != passwordTest) {
+			messages.add("パスワードと確認用パスワードが一致していません");
+		}
 		if (branch_id == 1 && position_id == 3) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
 		}

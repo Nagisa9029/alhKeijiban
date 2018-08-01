@@ -10,7 +10,7 @@ import beans.Branch;
 import dao.BranchDao;
 
 public class BranchService {
-	private static final int LIMIT_NUM = 100;
+	private static final int LIMIT_NUM = 1000;
 
 	public List<Branch> getBranch() {
 
@@ -18,8 +18,8 @@ public class BranchService {
 		try {
 			connection = getConnection();
 
-			BranchDao userDao = new BranchDao();
-			List<Branch> ret = BranchDao.getBranches(connection, LIMIT_NUM);
+			BranchDao branchDao = new BranchDao();
+			List<Branch> ret = branchDao.getBranches(connection, LIMIT_NUM);
 
 			commit(connection);
 
@@ -34,5 +34,4 @@ public class BranchService {
 			close(connection);
 		}
 	}
-
 }

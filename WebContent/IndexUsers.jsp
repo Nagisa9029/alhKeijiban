@@ -17,7 +17,7 @@
 		<div class="container">
 			<h1>ユーザー一覧</h1>
 			<hr>
-			<a href="./">戻る</a>
+			<a href="index.jsp">戻る</a>
 
 			<div class="main-contents">
 				<div class="header">
