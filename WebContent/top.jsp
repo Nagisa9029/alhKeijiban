@@ -39,11 +39,24 @@
 					<input name="category" id="category" /> <br />
 					<input type="submit" value="検索">
 				</form>
+				<hr>
+				<hr>
+
+				<c:if test="${ not empty errorMessages }">
+					<div class="errorMessages">
+						<ul>
+							<c:forEach items="${errorMessages}" var="message">
+								<li><c:out value="${message}" />
+							</c:forEach>
+						</ul>
+					</div>
+					<c:remove var="errorMessages" scope="session" />
+					<hr>
+					<hr>
+				</c:if>
 
 				<div class="posts">
 					<c:forEach items="${posts}" var="post">
-					<hr>
-					<hr>
 
 						<!-- 投稿記事 -->
 						<div class="post">
@@ -68,7 +81,6 @@
 						<c:forEach items="${comments}" var="comment">
 							<c:if test="${post.id == comment.postId}">
 								<div class="comment">
-									<c:out value="${comment.id}" />
 									<c:out value="${comment.name}" />
 									<c:out value="${comment.text}" />
 									<c:if test="${loginUser.id == comment.userId}">

@@ -2,6 +2,10 @@
 	//background-color: red;
 	font-family: 'Yu Mincho Light','YuMincho','Yu Mincho','Ÿà–¾’©‘Ì','Segoe UI Historic','Sylfaen','Palatino Linotype','Roman','ƒqƒ‰ƒMƒm–¾’© ProN','Hiragino Mincho ProN','‚l‚r –¾’©', 'MS Mincho','Palatino',sans-serif;
 }
+.errorMessages{
+	font-color: red;
+	background-color: green;
+}
 header {
 	//background-color: red;
 }
