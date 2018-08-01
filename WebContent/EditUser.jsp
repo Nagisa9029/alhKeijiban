@@ -56,7 +56,6 @@
 							<th>支店</th>
 							<td><select name="branch_id" required="true">
 									<option value="${editUser.branchId}"></option>
-									<option></option>
 									<c:forEach items="${branches}" var="branch">
 										<c:if test="${editUser.branchId == branch.id }">
 											<option value="${branch.id}" selected>${branch.name}</option>

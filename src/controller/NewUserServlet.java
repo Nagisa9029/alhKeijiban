@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.Branch;
 import beans.Position;
 import beans.User;
@@ -49,7 +51,7 @@ public class NewUserServlet extends HttpServlet {
 
 			new UserService().register(user);
 
-			response.sendRedirect("./");
+			response.sendRedirect("users");
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("user", user);
@@ -80,9 +82,6 @@ public class NewUserServlet extends HttpServlet {
 		String patternA = "^[\\w]+$" ;
 		String patternB = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]";
 		boolean CheckAccount = new UserService().getUser(account);
-
-		System.out.println(password);
-		System.out.println(passwordTest);
 
 		if(CheckAccount == false){
 			messages.add("このアカウント名は既に使用されています");
@@ -127,7 +126,7 @@ public class NewUserServlet extends HttpServlet {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
 		}
 
-		/*if (StringUtils.isEmpty(account) == true) {
+		if (StringUtils.isEmpty(account) == true) {
 			messages.add("アカウント名を入力してください");
 		}
 		if (StringUtils.isEmpty(name) == true) {
@@ -136,7 +135,7 @@ public class NewUserServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
-		if (StringUtils.isEmpty(branch_id) == true) {
+		/*if (StringUtils.isEmpty(branch_id) == true) {
 			messages.add("支店が選択されていません");
 		}
 		if (StringUtils.isEmpty(position_id) == true) {

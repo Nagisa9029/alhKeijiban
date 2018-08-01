@@ -24,7 +24,7 @@ public class IndexUserServlet extends HttpServlet {
 		List<IndexUser> users = new UserService().getUser();
 		request.setAttribute("users", users);
 
-		request.getRequestDispatcher("/IndexUsers.jsp").forward(request, response);
+		request.getRequestDispatcher("IndexUsers.jsp").forward(request, response);
 	}
 
 }

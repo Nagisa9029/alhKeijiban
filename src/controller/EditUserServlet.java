@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.Branch;
 import beans.IndexUser;
 import beans.Position;
@@ -152,16 +154,16 @@ public class EditUserServlet extends HttpServlet {
 		if (branch_id == 4 && position_id == 2) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
 		}
-		/*if (StringUtils.isEmpty(account) == true) {
+		if (StringUtils.isEmpty(account) == true) {
 			messages.add("アカウント名を入力してください");
 		}
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		if (StringUtils.isEmpty(branch_id) == true) {
+		//if (StringUtils.isEmpty(password) == true) {
+		//	messages.add("パスワードを入力してください");
+		//}
+		/*if (StringUtils.isEmpty(branch_id) == true) {
 			messages.add("支店が選択されていません");
 		}
 		if (StringUtils.isEmpty(position_id) == true) {

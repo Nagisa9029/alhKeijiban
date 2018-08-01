@@ -36,7 +36,7 @@
 						<tr>
 							<th>タイトル<br />
 								（30文字まで）</th>
-							<td><textarea name="title" cols="100" rows="1" required="true"></textarea></td>
+							<td><input name="title" size="100" required="true"></input></td>
 						</tr>
 						<tr>
 							<th>カテゴリー<br />

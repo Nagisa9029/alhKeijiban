@@ -35,8 +35,8 @@ public class IndexUserDao {
 			sql.append("INNER JOIN branches ");
 			sql.append("ON users.branch_id = branches.id ");
 			sql.append("INNER JOIN positions ");
-			sql.append("ON users.position_id = positions.id; ");
-			//sql.append("ORDER BY users.created_date DESC limit " + num);
+			sql.append("ON users.position_id = positions.id ");
+			sql.append("ORDER BY users.position_id; ");
 
 			ps = connection.prepareStatement(sql.toString());
 
