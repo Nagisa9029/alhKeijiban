@@ -15,7 +15,7 @@
 
 	<body>
 		<div class="container">
-			<h1>新規投稿</h1>
+			<h1 style="margin-top: 30px;">新規投稿</h1>
 			<hr>
 			<a href="./">戻る</a>
 

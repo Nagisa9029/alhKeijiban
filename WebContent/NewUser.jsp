@@ -16,7 +16,7 @@
 
 	<body>
 		<div class="container">
-			<h1>新規ユーザー登録</h1>
+			<h1 style="margin-top: 30px;">新規ユーザー登録</h1>
 			<hr>
 			<a href="users">戻る</a>
 

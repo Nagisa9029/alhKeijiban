@@ -119,6 +119,12 @@ public class EditUserServlet extends HttpServlet {
 				messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
 			}
 		}
+		if (password.length() != 0){
+			if (!Pattern.compile(password).matcher(passwordTest).find()) {
+				messages.add("パスワードと確認用パスワードが一致していません");
+			}
+		}
+
 		//if (password != passwordTest) {
 		//	messages.add("パスワードと確認用パスワードが一致していません");
 		//}

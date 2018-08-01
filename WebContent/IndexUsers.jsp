@@ -8,6 +8,7 @@
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 		<link href="./css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="./js/jQuery.min.js"></script>
+		<script type="text/javascript" src="./js/app.js"></script>
 		<title>ユーザー一覧</title>
 	</head>
 
@@ -15,7 +16,7 @@
 
 	<body>
 		<div class="container">
-			<h1>ユーザー一覧</h1>
+			<h1 style="margin-top: 30px;">ユーザー一覧</h1>
 			<hr>
 			<a href="index.jsp">戻る</a>
 
@@ -51,7 +52,7 @@
 									<td><c:out value="${user.positionName}" /></td>
 									<td><c:out value="${user.createdDate}" /></td>
 									<td>
-										<form action="edit" method="post"><br />
+										<form action="edit" method="post" onSubmit="return check()"><br />
 											<input type="hidden" name="id" value="${user.id}" />
 											<input type="hidden" name="account" value="${user.account}" />
 											<input type="hidden" name="name" value="${user.name}" id="name" />

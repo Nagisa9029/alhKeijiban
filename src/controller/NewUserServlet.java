@@ -96,9 +96,12 @@ public class NewUserServlet extends HttpServlet {
 		if (password.length() < 6 ||  20 < password.length() || !Pattern.compile(patternB).matcher(account).find()) {
 			messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
 		}
-		if (password != passwordTest) {
+		if (!Pattern.compile(password).matcher(passwordTest).find()) {
 			messages.add("パスワードと確認用パスワードが一致していません");
 		}
+		//if (password != passwordTest) {
+		//	messages.add("パスワードと確認用パスワードが一致していません");
+		//}
 		if (branch_id == 1 && position_id == 3) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
 		}

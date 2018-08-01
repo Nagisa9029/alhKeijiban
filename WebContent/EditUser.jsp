@@ -15,7 +15,7 @@
 
 	<body>
 		<div class="container">
-			<h1>ユーザー情報編集</h1>
+			<h1 style="margin-top: 30px;">ユーザー情報編集</h1>
 			<hr>
 			<a href="users">戻る</a>
 

@@ -16,15 +16,16 @@
 
 	<body>
 		<div class="container">
-			<h1>掲示板</h1>
+			<h1 style="margin-top: 30px;">掲示板</h1>
 			<hr>
 
 			<div class="main-contents">
 				<div class="header">
-					<c:if test="${ empty loginUser }">
-						<a href="login">ログイン</a>
+					<c:if test="${loginUser.positionId != 1 }">
+						<a href="newpost">新規投稿</a>
+						<a href="logout">ログアウト</a>
 					</c:if>
-					<c:if test="${ not empty loginUser }">
+					<c:if test="${loginUser.positionId == 1 }">
 						<a href="newpost">新規投稿</a>
 						<a href="users">管理画面</a>
 						<a href="logout">ログアウト</a>

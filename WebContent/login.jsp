@@ -19,7 +19,7 @@
 
 	<body>
 		<div class="container">
-			<h1 style="text-align: center;">Login</h1>
+			<h1 style="text-align: center; margin-top: 30px;">Login</h1>
 			<hr>
 
 			<div class="main-contents">
@@ -36,11 +36,15 @@
 
 				<div class="login-box">
 					<form action="login" method="post"><br />
-					<label for="account">アカウント名</label><br />
-					<input name="account" id="account" size="50" /><br />
+						<div style="margin: 30px;">
+							<label for="account">アカウント名</label><br />
+							<input name="account" id="account" size="50" /><br />
+						</div>
 
-					<label for="password">パスワード</label><br />
-					<input name="password" type="password" id="password" size="50" /><br />
+						<div style="margin: 30px;">
+							<label for="password">パスワード</label><br />
+							<input name="password" type="password" id="password" size="50" /><br />
+						</div>
 					<button type="submit" class="btn btn-primary">ログイン</button>
 					</form>
 				</div>
