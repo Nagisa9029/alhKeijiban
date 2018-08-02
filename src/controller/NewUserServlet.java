@@ -88,14 +88,23 @@ public class NewUserServlet extends HttpServlet {
 		String patternB = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]";
 		boolean CheckAccount = new UserService().getUser(account);
 
+		if (StringUtils.isBlank(account) == true) {
+			messages.add("ログインIDを入力してください");
+		}
 		if(CheckAccount == false){
-			messages.add("このアカウント名は既に使用されています");
+			messages.add("このログインID名は既に使用されています");
 		}
 		if ( account.length() < 6 || 20 < account.length() || !Pattern.compile(patternA).matcher(account).find()) {
-			messages.add("アカウントは半角英数字、6文字以上20文字以下で入力してください");
+			messages.add("ログインIDは半角英数字、6文字以上20文字以下で入力してください");
+		}
+		if (StringUtils.isBlank(name) == true) {
+			messages.add("名前を入力してください");
 		}
 		if (10 < name.length()) {
 			messages.add("名前は10文字以下で入力してください");
+		}
+		if (StringUtils.isBlank(password) == true) {
+			messages.add("パスワードを入力してください");
 		}
 		if (password.length() < 6 ||  20 < password.length() || !Pattern.compile(patternB).matcher(account).find()) {
 			messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
@@ -103,9 +112,12 @@ public class NewUserServlet extends HttpServlet {
 		if (!Pattern.compile(password).matcher(passwordTest).find()) {
 			messages.add("パスワードと確認用パスワードが一致していません");
 		}
-		//if (password != passwordTest) {
-		//	messages.add("パスワードと確認用パスワードが一致していません");
-		//}
+		/*if (StringUtils.isBlank(branch_id) == true) {
+			messages.add("支店が選択されていません");
+		}
+		if (StringUtils.isBlank(position_id) == true) {
+			messages.add("部署・役職が選択されていません");
+		}*/
 		if (branch_id == 1) {
 			if(position_id == 3 || position_id == 4) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
@@ -121,22 +133,6 @@ public class NewUserServlet extends HttpServlet {
 				messages.add("支店と部署・役職の組み合わせを確認してください");
 			}
 		}
-
-		if (StringUtils.isBlank(account) == true) {
-			messages.add("アカウント名を入力してください");
-		}
-		if (StringUtils.isBlank(name) == true) {
-			messages.add("名前を入力してください");
-		}
-		if (StringUtils.isBlank(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		/*if (StringUtils.isBlank(branch_id) == true) {
-			messages.add("支店が選択されていません");
-		}
-		if (StringUtils.isBlank(position_id) == true) {
-			messages.add("部署・役職が選択されていません");
-		}*/
 
 
 		if (messages.size() == 0) {

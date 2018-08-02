@@ -43,12 +43,12 @@
 						<tr>
 							<th>カテゴリー<br />
 								（10文字まで）</th>
-							<td><input name="category" id="category" value="${post.category}"/></td>
+							<td><input name="category" id="category" required="true"value="${post.category}"/></td>
 						</tr>
 						<tr>
 							<th>本文<br />
 							（1000文字まで）</th>
-							<td><textarea name="text" cols="100" rows="10" required="true" value="post.text}"></textarea></td>
+							<td><textarea name="text" cols="100" rows="10" required="true" value="${post.text}"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-primary">新規投稿</button>

@@ -36,7 +36,7 @@ public class IndexUserDao {
 			sql.append("ON users.branch_id = branches.id ");
 			sql.append("INNER JOIN positions ");
 			sql.append("ON users.position_id = positions.id ");
-			sql.append("ORDER BY users.position_id; ");
+			sql.append("ORDER BY users.position_id, users.branch_id; ");
 
 			ps = connection.prepareStatement(sql.toString());
 

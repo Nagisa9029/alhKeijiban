@@ -74,7 +74,7 @@
 							</div>
 							<div class="title">タイトル：<c:out value="${post.title}" /></div>
 							<div class="category">カテゴリー：<c:out value="${post.category}" /></div>
-							<div class="text">本文：<c:out value="${post.text}" /></div>
+							<div class="text">本文：<pre><c:out value="${post.text}" /></pre>
 
 						</div>
 						<hr>
@@ -84,7 +84,7 @@
 							<c:if test="${post.id == comment.postId}">
 								<div class="comment">
 									<c:out value="${comment.name}" />
-									<c:out value="${comment.text}" />
+									<pre><c:out value="${comment.text}" /></pre>
 									<c:if test="${loginUser.id == comment.userId}">
 										<form action="DeleteComment" method="post" onSubmit="return destroy()">
 											<input type="hidden" name="id" value="${comment.id}" />

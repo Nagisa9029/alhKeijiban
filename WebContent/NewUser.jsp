@@ -18,7 +18,7 @@
 		<div class="container">
 			<h1 style="margin-top: 30px;">新規ユーザー登録</h1>
 			<hr>
-			<a href="./">戻る</a>
+			<a href="users">戻る</a>
 
 			<div class="main-contents">
 
@@ -60,7 +60,12 @@
 							<td><select name="branch_id" required="true">
 									<option></option>
 									<c:forEach items="${branches}" var="branch">
-										<option value="${branch.id}">${branch.name}</option>
+										<c:if test="${user.branchId == branch.id}">
+											<option value="${branch.id}" selected><c:out value="${branch.name}" /></option>
+										</c:if>
+										<c:if test="${user.branchId != branch.id}">
+											<option value="${branch.id}"><c:out value="${branch.name}" /></option>
+										</c:if>
 									</c:forEach>
 							</select></td>
 						</tr>
@@ -69,7 +74,12 @@
 							<td><select name="position_id" required="true">
 									<option></option>
 									<c:forEach items="${positions}" var="position">
-										<option value="${position.id}">${position.name}</option>
+										<c:if test="${user.positionId == position.id}">
+											<option value="${position.id}" selected><c:out value="${position.name}" /></option>
+										</c:if>
+										<c:if test="${user.positionId != position.id}">
+											<option value="${position.id}"><c:out value="${position.name}" /></option>
+										</c:if>
 									</c:forEach>
 							</select></td>
 						</tr>

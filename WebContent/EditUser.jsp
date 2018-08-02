@@ -57,59 +57,54 @@
 						<tr>
 							<th>支店</th>
 							<td><select name="branch_id" required="true">
-							
-							
-							<!--<c:choose>
-							 <c:when test="${loginUser.id == editUser.id }">
-								<option value="${editUser.branchId}"></option>
-									<option value="${branch.id}" selected>${branch.name}</option>
-
-								</c:when>
-								<c:otherwise>
-								<c:forEach items="${branches}" var="branch">
-										<c:if test="${editUser.branchId == branch.id }">
-											<option value="${branch.id}" selected>${branch.name}</option>
-										</c:if>
-										<c:if test="${editUser.branchId != branch.id }">
-											<option value="${branch.id}">${branch.name}</option>
-										</c:if>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>-->
-							
-							
-							
-							
-									<option value="${editUser.branchId}"></option>
-									<c:forEach items="${branches}" var="branch">
-										<c:if test="${editUser.branchId == branch.id }">
-											<option value="${branch.id}" selected>${branch.name}</option>
-										</c:if>
-										<c:if test="${editUser.branchId != branch.id }">
-											<option value="${branch.id}">${branch.name}</option>
-										</c:if>
-									</c:forEach>
-									
-									
-									
+								<c:choose>
+									<c:when test="${loginUser.id == editUser.id }">
+										<c:forEach items="${branches}" var="branch">
+											<c:if test="${editUser.branchId == branch.id }">
+												<option value="${branch.id}" selected><c:out value="${branch.name}" /></option>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${branches}" var="branch">
+											<c:if test="${editUser.branchId == branch.id }">
+												<option value="${branch.id}" selected><c:out value="${branch.name}" /></option>
+											</c:if>
+											<c:if test="${editUser.branchId != branch.id }">
+												<option value="${branch.id}"><c:out value="${branch.name}" /></option>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</select></td>
 						</tr>
 						<tr>
 							<th>部署・役職</th>
 							<td><select name="position_id" required="true">
-									<option value="${editUser.positionId}"></option>
-									<c:forEach items="${positions}" var="position">
-										<c:if test="${editUser.positionId == position.id }">
-											<option value="${position.id}" selected>${position.name}</option>
-										</c:if>
-										<c:if test="${editUser.positionId != position.id }">
-											<option value="${position.id}">${position.name}</option>
-										</c:if>
-
-									</c:forEach>
+								<c:choose>
+									<c:when test="${loginUser.id == editUser.id }">
+										<c:forEach items="${positions}" var="position">
+											<c:if test="${editUser.positionId == position.id }">
+												<option value="${position.id}" selected><c:out value="${position.name}" /></option>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${positions}" var="position">
+											<c:if test="${editUser.positionId == position.id }">
+												<option value="${position.id}" selected><c:out value="${position.name}" /></option>
+											</c:if>
+											<c:if test="${editUser.positionId != position.id }">
+												<option value="${position.id}"><c:out value="${position.name}" /></option>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</select></td>
 						</tr>
 					</table>
+
+					<input type="hidden" name="accountTest" value="${editUser.account}" />
 					<input type="hidden" name="id" value="${editUser.id}" id="id" />
 					<input type="hidden" name="is_stopped" value="${editUser.isStopped}" id="is_stopped" />
 					<button type="submit" class="btn btn-primary">編集</button>

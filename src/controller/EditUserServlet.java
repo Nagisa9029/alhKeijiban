@@ -34,14 +34,22 @@ public class EditUserServlet extends HttpServlet {
 		Integer ID = Integer.parseInt(request.getParameter("id"));
 		List<IndexUser> editUser = new UserService().getShowUser(ID);
 
-		List<Branch> branches = new BranchService().getBranch();
-		request.setAttribute("branches",  branches);
+		if(editUser.size() == 0) {
+			HttpSession session = request.getSession();
+			List<String> messages = new ArrayList<String>();
+			messages.add("不正なパラメーターでアクセスされました");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("users");
+		}else{
+			List<Branch> branches = new BranchService().getBranch();
+			request.setAttribute("branches",  branches);
 
-		List<Position> positions = new PositionService().getPosition();
-		request.setAttribute("positions", positions);
+			List<Position> positions = new PositionService().getPosition();
+			request.setAttribute("positions", positions);
 
-		request.setAttribute("editUser", editUser.get(0));
-		request.getRequestDispatcher("EditUser.jsp").forward(request, response);
+			request.setAttribute("editUser", editUser.get(0));
+			request.getRequestDispatcher("EditUser.jsp").forward(request, response);
+		}
 	}
 
 	@Override
@@ -105,13 +113,22 @@ public class EditUserServlet extends HttpServlet {
 		Integer position_id = Integer.parseInt(request.getParameter("position_id"));
 		String patternA = "^[\\w]+$" ;
 		String patternB = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]";
-		//boolean CheckAccount = new UserService().getUser(account);
+		String accountTest = request.getParameter("accountTest");
+		boolean CheckAccount = new UserService().getUser(account);
 
-		//if(CheckAccount == false){
-		//	messages.add("このアカウント名は既に使用されています");
-		//}
+		if (StringUtils.isBlank(account) == true) {
+			messages.add("ログインID名を入力してください");
+		}
+		if(!Pattern.compile(account).matcher(accountTest).find()){
+			if(CheckAccount == false){
+				messages.add("このログインID名は既に使用されています");
+			}
+		}
 		if ( account.length() < 6 || 20 < account.length() || !Pattern.compile(patternA).matcher(account).find()) {
-			messages.add("アカウントは半角英数字、6文字以上20文字以下で入力してください");
+			messages.add("ログインIDは半角英数字、6文字以上20文字以下で入力してください");
+		}
+		if (StringUtils.isBlank(name) == true) {
+			messages.add("名前を入力してください");
 		}
 		if (10 < name.length()) {
 			messages.add("名前は10文字以下で入力してください");
@@ -121,15 +138,20 @@ public class EditUserServlet extends HttpServlet {
 				messages.add("パスワードは記号を含む半角文字で6文字以上20文字以下で入力してください");
 			}
 		}
+		//if (StringUtils.isBlank(password) == true) {
+		//	messages.add("パスワードを入力してください");
+		//}
 		if (password.length() != 0){
 			if (!Pattern.compile(password).matcher(passwordTest).find()) {
 				messages.add("パスワードと確認用パスワードが一致していません");
 			}
 		}
-
-		//if (password != passwordTest) {
-		//	messages.add("パスワードと確認用パスワードが一致していません");
-		//}
+		/*if (StringUtils.isBlank(branch_id) == true) {
+			messages.add("支店が選択されていません");
+		}
+		if (StringUtils.isBlank(position_id) == true) {
+			messages.add("部署・役職が選択されていません");
+		}*/
 		if (branch_id == 1) {
 			if(position_id == 3 || position_id == 4) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
@@ -145,21 +167,10 @@ public class EditUserServlet extends HttpServlet {
 				messages.add("支店と部署・役職の組み合わせを確認してください");
 			}
 		}
-		if (StringUtils.isBlank(account) == true) {
-			messages.add("アカウント名を入力してください");
-		}
-		if (StringUtils.isBlank(name) == true) {
-			messages.add("名前を入力してください");
-		}
-		//if (StringUtils.isEmpty(password) == true) {
-		//	messages.add("パスワードを入力してください");
-		//}
-		/*if (StringUtils.isEmpty(branch_id) == true) {
-			messages.add("支店が選択されていません");
-		}
-		if (StringUtils.isEmpty(position_id) == true) {
-			messages.add("部署・役職が選択されていません");
-		}*/
+
+
+
+
 
 		if (messages.size() == 0) {
 			return true;

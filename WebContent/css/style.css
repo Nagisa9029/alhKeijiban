@@ -1,10 +1,15 @@
 *{
-	//background-color: red;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #6c6b6b;
 	font-family: 'Yu Mincho Light','YuMincho','Yu Mincho','Ÿà–¾’©‘Ì','Segoe UI Historic','Sylfaen','Palatino Linotype','Roman','ƒqƒ‰ƒMƒm–¾’© ProN','Hiragino Mincho ProN','‚l‚r –¾’©', 'MS Mincho','Palatino',sans-serif;
 }
+a{
+	text-decoration: none;
+}
 .errorMessages{
-	font-color: red;
-	background-color: green;
+	color: red;
 }
 header {
 	//background-color: red;

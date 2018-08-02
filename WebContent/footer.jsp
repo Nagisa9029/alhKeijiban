@@ -3,5 +3,5 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <footer>
-	<h3 class="copyright">Copyright(c)Takuto Nakamura</h3>
+	<h5 class="copyright">Copyright(c)Takuto Nakamura</h5>
 </footer>

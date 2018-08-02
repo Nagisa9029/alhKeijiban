@@ -26,13 +26,26 @@
 					<a href="logout">ログアウト</a>
 				</div>
 
+
+				<!-- エラーメッセージ -->
+				<c:if test="${ not empty errorMessages }">
+					<div class="errorMessages">
+						<ul>
+							<c:forEach items="${errorMessages}" var="message">
+								<li><c:out value="${message}" />
+							</c:forEach>
+						</ul>
+					</div>
+					<c:remove var="errorMessages" scope="session" />
+				</c:if>
+
 				<div class="Users">
 
 					<table class="table table-hover table-condensed">
 						<thead>
 							<tr>
 								<th>名前</th>
-								<th>アカウント</th>
+								<th>ログインID</th>
 								<th>支店</th>
 								<th>部署・役職</th>
 								<th></th>
@@ -59,12 +72,21 @@
 											<input type="hidden" name="password" value="" />
 											<input type="hidden" name="branch_id" value="${user.branchId}" />
 											<input type="hidden" name="position_id" value="${user.positionId}" />
-											<c:if test="${ user.isStopped == 1 }">
-												<input type="hidden" name="is_stopped" value="0" />
-												<button type="submit" class="btn btn-success">停止</button></c:if>
-											<c:if test="${ user.isStopped == 0 }">
-												<input type="hidden" name="is_stopped" value="1" />
-												<button type="submit" class="btn btn-default">復活</button></c:if>
+											<input type="hidden" name="accountTest" value="${user.account}" />
+
+											<c:choose>
+												<c:when test="${ user.id == loginUser.id }">
+													<button type="buttont" class="btn btn-danger disabled">マイアカウント</button>
+												</c:when>
+												<c:when test="${ user.isStopped == 1 }">
+													<input type="hidden" name="is_stopped" value="0" />
+													<button type="submit" class="btn btn-success">停止</button>
+												</c:when>
+												<c:when test="${ user.isStopped == 0 }">
+													<input type="hidden" name="is_stopped" value="1" />
+													<button type="submit" class="btn btn-default">復活</button>
+												</c:when>
+											</c:choose>
 										</form>
 									</td>
 								</tr>
