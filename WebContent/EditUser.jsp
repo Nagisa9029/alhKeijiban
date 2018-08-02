@@ -17,9 +17,11 @@
 		<div class="container">
 			<h1 style="margin-top: 30px;">ユーザー情報編集</h1>
 			<hr>
-			<a href="users">戻る</a>
+			<a href="./">戻る</a>
 
 			<div class="main-contents">
+
+				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
 						<ul>
@@ -45,16 +47,39 @@
 						</tr>
 						<tr>
 							<th>パスワード</th>
-							<td><input name="password" value="" id="password" size="50" />(記号を含む半角英数)<br />
+							<td><input type="password" name="password" value="" id="password" size="50" />(記号を含む半角英数)<br />
 								※6文字以上20文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>パスワード（確認用）</th>
-							<td><input name="passwordTest" value="" id="passwordTest" size="50" /></td>
+							<td><input type="password" name="passwordTest" value="" id="passwordTest" size="50" /></td>
 						</tr>
 						<tr>
 							<th>支店</th>
 							<td><select name="branch_id" required="true">
+							
+							
+							<!--<c:choose>
+							 <c:when test="${loginUser.id == editUser.id }">
+								<option value="${editUser.branchId}"></option>
+									<option value="${branch.id}" selected>${branch.name}</option>
+
+								</c:when>
+								<c:otherwise>
+								<c:forEach items="${branches}" var="branch">
+										<c:if test="${editUser.branchId == branch.id }">
+											<option value="${branch.id}" selected>${branch.name}</option>
+										</c:if>
+										<c:if test="${editUser.branchId != branch.id }">
+											<option value="${branch.id}">${branch.name}</option>
+										</c:if>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>-->
+							
+							
+							
+							
 									<option value="${editUser.branchId}"></option>
 									<c:forEach items="${branches}" var="branch">
 										<c:if test="${editUser.branchId == branch.id }">
@@ -64,6 +89,9 @@
 											<option value="${branch.id}">${branch.name}</option>
 										</c:if>
 									</c:forEach>
+									
+									
+									
 							</select></td>
 						</tr>
 						<tr>

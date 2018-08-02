@@ -32,9 +32,9 @@ public class UserPostDao {
 			sql.append("INNER JOIN users ");
 			sql.append("ON posts.user_id = users.id ");
 			if (category == null ) {
-				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + "' AND '" + dateEnd + "'" );
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59'" );
 			} else {
-				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + "' AND '" + dateEnd + "' AND posts.category LIKE '%" + category + "%' ");
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59' AND posts.category LIKE '%" + category + "%' ");
 			}
 			sql.append("ORDER BY created_date DESC limit " + num);
 

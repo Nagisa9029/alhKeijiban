@@ -20,6 +20,8 @@
 			<a href="./">戻る</a>
 
 			<div class="main-contents">
+
+				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
 						<ul>
@@ -36,17 +38,17 @@
 						<tr>
 							<th>タイトル<br />
 								（30文字まで）</th>
-							<td><input name="title" size="100" required="true"></input></td>
+							<td><input name="title" size="100" required="true" value="${post.title}"></input></td>
 						</tr>
 						<tr>
 							<th>カテゴリー<br />
 								（10文字まで）</th>
-							<td><input name="category" id="category" /></td>
+							<td><input name="category" id="category" value="${post.category}"/></td>
 						</tr>
 						<tr>
 							<th>本文<br />
 							（1000文字まで）</th>
-							<td><textarea name="text" cols="100" rows="10" required="true"></textarea></td>
+							<td><textarea name="text" cols="100" rows="10" required="true" value="post.text}"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-primary">新規投稿</button>

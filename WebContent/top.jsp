@@ -9,6 +9,7 @@
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 		<link href="./css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="./js/jQuery.min.js"></script>
+		<script type="text/javascript" src="./js/app.js"></script>
 		<title>掲示板</title>
 	</head>
 
@@ -34,14 +35,15 @@
 				<hr>
 
 				<form action="index.jsp" method="get">
-					<input type="date" name="dateStr" />～<input type="date" name="dateEnd" /><br />
-					<label for="category">カテゴリー</label>
-					<input name="category" id="category" /> <br />
+					<input type="date" name="dateStr" value="${dateStr}" />～<input type="date" name="dateEnd" value="${dateEnd}" /><br />
+					<label for="cate">カテゴリー</label>
+					<input name="cate" id="cate" value="${cate}" /> <br />
 					<input type="submit" value="検索">
 				</form>
 				<hr>
 				<hr>
 
+				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
 						<ul>
@@ -64,7 +66,7 @@
 								<span class="date"><fmt:formatDate value="${post.createdDate}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
 								<span class="name"><c:out value="${post.name}" /></span>
 								<c:if test="${loginUser.id == post.userId}">
-									<form action="delete" method="post">
+									<form action="delete" method="post" onSubmit="return destroy()">
 										<input type="hidden" name="id" value="${post.id}" />
 										<input type="submit" value="投稿削除" >
 									</form>
@@ -84,7 +86,7 @@
 									<c:out value="${comment.name}" />
 									<c:out value="${comment.text}" />
 									<c:if test="${loginUser.id == comment.userId}">
-										<form action="DeleteComment" method="post">
+										<form action="DeleteComment" method="post" onSubmit="return destroy()">
 											<input type="hidden" name="id" value="${comment.id}" />
 											<input type="submit" value="コメント削除">
 										</form>

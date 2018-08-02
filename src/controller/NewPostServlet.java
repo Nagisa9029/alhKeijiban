@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.Post;
 import beans.User;
 import service.PostService;
@@ -32,24 +34,30 @@ public class NewPostServlet extends HttpServlet {
 
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
+		Post post = getPost(request);
 
 		if (isValid(request, messages) == true) {
-
-			User user = (User) session.getAttribute("loginUser");
-
-			Post post = new Post();
-			post.setTitle(request.getParameter("title"));
-			post.setText(request.getParameter("text"));
-			post.setCategory(request.getParameter("category"));
-			post.setUserId(user.getId());
-
 			new PostService().register(post);
-
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("newpost");
+			request.setAttribute("post", post);
+			//response.sendRedirect("newpost");
+			request.getRequestDispatcher("NewPost.jsp").forward(request, response);
 		}
+	}
+
+	private Post getPost(HttpServletRequest request)
+			throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+
+		Post post = new Post();
+		post.setTitle(request.getParameter("title"));
+		post.setText(request.getParameter("text"));
+		post.setCategory(request.getParameter("category"));
+		post.setUserId(user.getId());
+		return post;
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
@@ -68,16 +76,16 @@ public class NewPostServlet extends HttpServlet {
 			messages.add("本文は1000文字以下で入力してください");
 		}
 
-		/*if (StringUtils.isEmpty(title) == true) {
+		if (StringUtils.isBlank(title) == true) {
 			messages.add("タイトルを入力してください");
 		}
 
-		if (StringUtils.isEmpty(text) == true) {
+		if (StringUtils.isBlank(text) == true) {
 			messages.add("本文を入力してください");
 		}
-		if (StringUtils.isEmpty(category) == true) {
+		if (StringUtils.isBlank(category) == true) {
 			messages.add("カテゴリーを入力してください");
-		}*/
+		}
 
 		if (messages.size() == 0) {
 			return true;

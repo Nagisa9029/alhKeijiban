@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.UserComment;
 import beans.UserPost;
 import service.CommentService;
@@ -22,28 +24,34 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		String dateStr = "2018-01-01";
-		String dateEnd = "2020-12-31";
-		String category = null;
+		String dateStr = null;
+		String dateEnd = null;
+		String cate= null;
 
-		if(request.getParameter("dateStr") != null && request.getParameter("dateEnd") != null){
-			if (request.getParameter("dateStr").length() != 0) {
-				dateStr = request.getParameter("dateStr");
-			}
-			if (request.getParameter("dateEnd").length() != 0) {
-				dateEnd = request.getParameter("dateEnd");
-			}
+		if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
+			dateStr = "2018-01-01";
+			dateEnd = "2020-12-31";
+			//cate = null;
 		}
-		if (request.getParameter("category") != null) {
-			category = request.getParameter("category");
+		if (StringUtils.isBlank(request.getParameter("dateStr")) != true) {
+			dateStr = request.getParameter("dateStr");
+			request.setAttribute("dateStr", dateStr);
+		}
+		if (StringUtils.isBlank(request.getParameter("dateEnd")) != true){
+			dateEnd = request.getParameter("dateEnd");
+			request.setAttribute("dateEnd", dateEnd);
+		}
+		if (request.getParameter("cate") != null) {
+			cate = request.getParameter("cate");
+			request.setAttribute("cate", cate);
 		}
 
 
-		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, category);
-		request.setAttribute("posts",  posts);
+		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate);
+		request.setAttribute("posts", posts);
 
 		List<UserComment> comments = new CommentService().getComment();
-		request.setAttribute("comments",  comments);
+		request.setAttribute("comments", comments);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

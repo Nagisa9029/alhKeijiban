@@ -18,9 +18,11 @@
 		<div class="container">
 			<h1 style="margin-top: 30px;">新規ユーザー登録</h1>
 			<hr>
-			<a href="users">戻る</a>
+			<a href="./">戻る</a>
 
 			<div class="main-contents">
+
+				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
 						<ul>
@@ -46,12 +48,12 @@
 						</tr>
 						<tr>
 							<th>パスワード</th>
-							<td><input name="password" id="password" required="true" size="50" />（記号を含む半角英数）<br />
+							<td><input type="password" name="password" id="password" required="true" size="50" />（記号を含む半角英数）<br />
 								※6文字以上20文字以下で設定してください</td>
 						</tr>
 						<tr>
 							<th>パスワード（確認用）</th>
-							<td><input name="passwordTest" id="passwordTest" required="true" size="50" /></td>
+							<td><input type="password" name="passwordTest" id="passwordTest" required="true" size="50" /></td>
 						</tr>
 						<tr>
 							<th>支店</th>

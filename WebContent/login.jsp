@@ -23,7 +23,9 @@
 			<hr>
 
 			<div class="main-contents">
-				<c:if test="${ not empty errorMessage }">
+
+				<!-- エラーメッセージ -->
+				<c:if test="${ not empty errorMessages }">
 					<div class="errorMessages">
 						<ul>
 							<c:forEach items="${errorMessages }" var="message">
@@ -38,12 +40,12 @@
 					<form action="login" method="post"><br />
 						<div style="margin: 30px;">
 							<label for="account">アカウント名</label><br />
-							<input name="account" id="account" size="50" /><br />
+							<input name="account" id="account" size="40" /><br />
 						</div>
 
 						<div style="margin: 30px;">
 							<label for="password">パスワード</label><br />
-							<input name="password" type="password" id="password" size="50" /><br />
+							<input name="password" type="password" id="password" size="40" /><br />
 						</div>
 					<button type="submit" class="btn btn-primary">ログイン</button>
 					</form>

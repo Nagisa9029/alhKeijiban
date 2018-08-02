@@ -130,34 +130,25 @@ public class EditUserServlet extends HttpServlet {
 		//if (password != passwordTest) {
 		//	messages.add("パスワードと確認用パスワードが一致していません");
 		//}
-		if (branch_id == 1 && position_id == 3) {
+		if (branch_id == 1) {
+			if(position_id == 3 || position_id == 4) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
-		if (branch_id == 1 && position_id == 4) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
+		if (position_id == 1) {
+			if (branch_id != 1) {
+				messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
-		if (branch_id == 2 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
+		if (position_id == 2) {
+			if (branch_id != 1) {
+				messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
-		if (branch_id == 3 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 4 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 2 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 3 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 4 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (StringUtils.isEmpty(account) == true) {
+		if (StringUtils.isBlank(account) == true) {
 			messages.add("アカウント名を入力してください");
 		}
-		if (StringUtils.isEmpty(name) == true) {
+		if (StringUtils.isBlank(name) == true) {
 			messages.add("名前を入力してください");
 		}
 		//if (StringUtils.isEmpty(password) == true) {

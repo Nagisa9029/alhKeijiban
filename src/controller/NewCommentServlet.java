@@ -42,7 +42,7 @@ public class NewCommentServlet extends HttpServlet {
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
+			response.sendRedirect("top.jsp");
 		}
 	}
 
@@ -50,7 +50,7 @@ public class NewCommentServlet extends HttpServlet {
 
 		String text = request.getParameter("text");
 
-		if (StringUtils.isEmpty(text) == true) {
+		if (StringUtils.isBlank(text) == true) {
 			messages.add("コメントを入力してください");
 		}
 		if (500 < text.length()) {

@@ -53,9 +53,14 @@ public class NewUserServlet extends HttpServlet {
 
 			response.sendRedirect("users");
 		} else {
+			List<Branch> branches = new BranchService().getBranch();
+			request.setAttribute("branches",  branches);
+
+			List<Position> positions = new PositionService().getPosition();
+			request.setAttribute("positions", positions);
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("user", user);
-			response.sendRedirect("newuser");
+			request.getRequestDispatcher("NewUser.jsp").forward(request, response);
 		}
 	}
 
@@ -101,44 +106,35 @@ public class NewUserServlet extends HttpServlet {
 		//if (password != passwordTest) {
 		//	messages.add("パスワードと確認用パスワードが一致していません");
 		//}
-		if (branch_id == 1 && position_id == 3) {
+		if (branch_id == 1) {
+			if(position_id == 3 || position_id == 4) {
 			messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
-		if (branch_id == 1 && position_id == 4) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
+		if (position_id == 1) {
+			if (branch_id != 1) {
+				messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
-		if (branch_id == 2 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 3 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 4 && position_id == 1) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 2 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 3 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
-		}
-		if (branch_id == 4 && position_id == 2) {
-			messages.add("支店と部署・役職の組み合わせを確認してください");
+		if (position_id == 2) {
+			if (branch_id != 1) {
+				messages.add("支店と部署・役職の組み合わせを確認してください");
+			}
 		}
 
-		if (StringUtils.isEmpty(account) == true) {
+		if (StringUtils.isBlank(account) == true) {
 			messages.add("アカウント名を入力してください");
 		}
-		if (StringUtils.isEmpty(name) == true) {
+		if (StringUtils.isBlank(name) == true) {
 			messages.add("名前を入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
+		if (StringUtils.isBlank(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
-		/*if (StringUtils.isEmpty(branch_id) == true) {
+		/*if (StringUtils.isBlank(branch_id) == true) {
 			messages.add("支店が選択されていません");
 		}
-		if (StringUtils.isEmpty(position_id) == true) {
+		if (StringUtils.isBlank(position_id) == true) {
 			messages.add("部署・役職が選択されていません");
 		}*/
 
