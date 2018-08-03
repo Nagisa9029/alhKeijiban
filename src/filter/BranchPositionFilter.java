@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
@@ -28,7 +29,7 @@ public class BranchPositionFilter implements Filter{
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}else{
-			request.getRequestDispatcher("/login").forward(request, response);
+			((HttpServletResponse) response).sendRedirect("login");
 		}
 	}
 

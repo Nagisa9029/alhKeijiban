@@ -17,24 +17,27 @@
 
 	<body>
 		<div class="container">
+
+			<img src="./fonts/home.png" width="20"><span style="font-size: 20px; padding-top: 10px 0 0 10px;"><a href="./">ホーム</a></span>
+
+
 			<h1 style="margin-top: 30px;">掲示板</h1>
+			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
 
 			<div class="main-contents">
 				<div class="header">
 					<c:if test="${loginUser.positionId != 1 }">
 						<a href="newpost">新規投稿</a>
-						<a href="logout">ログアウト</a>
 					</c:if>
 					<c:if test="${loginUser.positionId == 1 }">
 						<a href="newpost">新規投稿</a>
 						<a href="users">管理画面</a>
-						<a href="logout">ログアウト</a>
 					</c:if>
 				</div>
 				<hr>
 
-				<form action="index.jsp" method="get">
+				<form action="./" method="get">
 					<input type="date" name="dateStr" value="${dateStr}" />～<input type="date" name="dateEnd" value="${dateEnd}" /><br />
 					<label for="cate">カテゴリー</label>
 					<input name="cate" id="cate" value="${cate}" /> <br />
@@ -61,52 +64,50 @@
 					<c:forEach items="${posts}" var="post">
 
 						<!-- 投稿記事 -->
-						<div class="post">
-							<div class="account-name">
-								<span class="date"><fmt:formatDate value="${post.createdDate}" pattern="yyyy/MM/dd HH:mm:ss" /></span>
+						<div class="box-post">
+							<c:if test="${loginUser.id == post.userId}">
+								<form action="delete" method="post" onSubmit="return destroy()">
+									<input type="hidden" name="id" value="${post.id}" />
+									<input type="submit" value="投稿削除" >
+								</form>
+							</c:if>
+							<div class="box-title">
+								<span class="date"><fmt:formatDate value="${post.createdDate}" pattern="yyyy/MM/dd" /></span>
 								<span class="name"><c:out value="${post.name}" /></span>
-								<c:if test="${loginUser.id == post.userId}">
-									<form action="delete" method="post" onSubmit="return destroy()">
-										<input type="hidden" name="id" value="${post.id}" />
-										<input type="submit" value="投稿削除" >
-									</form>
-								</c:if>
 							</div>
 							<div class="title">タイトル：<c:out value="${post.title}" /></div>
 							<div class="category">カテゴリー：<c:out value="${post.category}" /></div>
-							<div class="text">本文：<pre><c:out value="${post.text}" /></pre>
+							<br />
+							<div class="text"><pre><c:out value="${post.text}" /></pre>
+							<hr>
+							<hr>
 
-						</div>
-						<hr>
+							<!-- コメント一覧 -->
+							<c:forEach items="${comments}" var="comment">
+								<c:if test="${post.id == comment.postId}">
+									<div class="comment">
+										<c:if test="${loginUser.id == comment.userId}">
+											<form action="DeleteComment" method="post" onSubmit="return destroy()">
+												<input type="hidden" name="id" value="${comment.id}" />
+												<input type="submit" value="コメント削除">
+											</form>
+										</c:if>
+										<c:out value="${comment.name}" />
+										<pre><c:out value="${comment.text}" /></pre>
+									</div>
+									<hr>
+								</c:if>
+							</c:forEach>
 
-						<!-- コメント一覧 -->
-						<c:forEach items="${comments}" var="comment">
-							<c:if test="${post.id == comment.postId}">
-								<div class="comment">
-									<c:out value="${comment.name}" />
-									<pre><c:out value="${comment.text}" /></pre>
-									<c:if test="${loginUser.id == comment.userId}">
-										<form action="DeleteComment" method="post" onSubmit="return destroy()">
-											<input type="hidden" name="id" value="${comment.id}" />
-											<input type="submit" value="コメント削除">
-										</form>
-									</c:if>
-								</div>
-							</c:if>
-						</c:forEach>
-
-						<!-- コメント投稿 -->
-						<div class="form-area">
-							<form action="NewComment" method="post" >
-								<textarea name="text" cols="100" rows="5" class="tweet-box" required="true"></textarea><br />
-								<input type="hidden" name="post" value="${post.id}" />
-								<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）
-							</form>
-						</div>
-						<br />
-						<br />
-						<br />
-						<br />
+							<!-- コメント投稿 -->
+							<div class="form-area">
+								<form action="NewComment" method="post" >
+									<textarea name="text" cols="100" rows="5" class="tweet-box" required="true"></textarea><br />
+									<input type="hidden" name="post" value="${post.id}" />
+									<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）
+								</form>
+							</div>
+						</div></div>
 					</c:forEach>
 
 				</div>

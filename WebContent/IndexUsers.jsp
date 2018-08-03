@@ -17,13 +17,13 @@
 	<body>
 		<div class="container">
 			<h1 style="margin-top: 30px;">ユーザー一覧</h1>
+			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
 			<a href="./">戻る</a>
 
 			<div class="main-contents">
 				<div class="header">
 					<a href="newuser">ユーザー新規登録</a>
-					<a href="logout">ログアウト</a>
 				</div>
 
 
@@ -65,29 +65,39 @@
 									<td><c:out value="${user.positionName}" /></td>
 									<td><c:out value="${user.createdDate}" /></td>
 									<td>
-										<form action="edit" method="post" onSubmit="return check()"><br />
-											<input type="hidden" name="id" value="${user.id}" />
-											<input type="hidden" name="account" value="${user.account}" />
-											<input type="hidden" name="name" value="${user.name}" id="name" />
-											<input type="hidden" name="password" value="" />
-											<input type="hidden" name="branch_id" value="${user.branchId}" />
-											<input type="hidden" name="position_id" value="${user.positionId}" />
-											<input type="hidden" name="accountTest" value="${user.account}" />
-
-											<c:choose>
-												<c:when test="${ user.id == loginUser.id }">
-													<button type="buttont" class="btn btn-danger disabled">マイアカウント</button>
-												</c:when>
-												<c:when test="${ user.isStopped == 1 }">
+										<c:choose>
+											<c:when test="${ user.id == loginUser.id }">
+												<button class="btn btn-default disabled">ログイン中</button>
+											</c:when>
+											<c:when test="${ user.isStopped == 1 }">
+												<form action="edit" method="post" onSubmit="return check()"><br />
+													<input type="hidden" name="id" value="${user.id}" />
+													<input type="hidden" name="account" value="${user.account}" />
+													<input type="hidden" name="name" value="${user.name}" id="name" />
+													<input type="hidden" name="password" value="" />
+													<input type="hidden" name="branch_id" value="${user.branchId}" />
+													<input type="hidden" name="position_id" value="${user.positionId}" />
+													<input type="hidden" name="accountTest" value="${user.account}" />
 													<input type="hidden" name="is_stopped" value="0" />
-													<button type="submit" class="btn btn-success">停止</button>
-												</c:when>
-												<c:when test="${ user.isStopped == 0 }">
+													<button type="submit" class="btn btn-danger">停止</button>
+												</form>
+											</c:when>
+											<c:when test="${ user.isStopped == 0 }">
+												<form action="edit" method="post" onSubmit="return check()"><br />
+													<input type="hidden" name="id" value="${user.id}" />
+													<input type="hidden" name="account" value="${user.account}" />
+													<input type="hidden" name="name" value="${user.name}" id="name" />
+													<input type="hidden" name="password" value="" />
+													<input type="hidden" name="branch_id" value="${user.branchId}" />
+													<input type="hidden" name="position_id" value="${user.positionId}" />
+													<input type="hidden" name="accountTest" value="${user.account}" />
 													<input type="hidden" name="is_stopped" value="1" />
-													<button type="submit" class="btn btn-default">復活</button>
-												</c:when>
-											</c:choose>
-										</form>
+													<button type="submit" class="btn btn-success">復活</button>
+												</form>
+											</c:when>
+
+
+										</c:choose>
 									</td>
 								</tr>
 							</c:forEach>

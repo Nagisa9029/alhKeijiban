@@ -16,6 +16,7 @@
 	<body>
 		<div class="container">
 			<h1 style="margin-top: 30px;">ユーザー情報編集</h1>
+			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
 			<a href="./">戻る</a>
 

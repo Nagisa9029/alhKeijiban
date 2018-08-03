@@ -10,11 +10,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter(urlPatterns={"/index.jsp"})
+@WebFilter(urlPatterns={"/index.jsp", "/logout", "/NewComment", "/newpost", "/DeleteComment", "/delete"})
 public class LoginFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,ServletException{
 
@@ -24,7 +25,7 @@ public class LoginFilter implements Filter{
 		if(loginUser != null){
 			chain.doFilter(request, response);
 		}else{
-			request.getRequestDispatcher("/login").forward(request, response);
+			((HttpServletResponse) response).sendRedirect("login");
 		}
 	}
 

@@ -26,10 +26,10 @@
 
 				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
-					<div class="errorMessages">
+					<div class="errorMessages" style="text-align: center;;">
 						<ul>
 							<c:forEach items="${errorMessages }" var="message">
-								<li><c:out value="${message }" />
+								<c:out value="${message }" />
 							</c:forEach>
 						</ul>
 					</div>
@@ -40,7 +40,7 @@
 					<form action="login" method="post"><br />
 						<div style="margin: 30px;">
 							<label for="account"><img src="./fonts/account.png" width="20">アカウント名</label><br />
-							<input name="account" id="account" size="40" /><br />
+							<input name="account" id="account" size="40" value="${user.account}" /><br />
 						</div>
 
 						<div style="margin: 30px;">

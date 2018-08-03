@@ -31,24 +31,41 @@ public class EditUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		Integer ID = Integer.parseInt(request.getParameter("id"));
-		List<IndexUser> editUser = new UserService().getShowUser(ID);
-
-		if(editUser.size() == 0) {
+		if(StringUtils.isBlank(request.getParameter("id")) == true) {
 			HttpSession session = request.getSession();
 			List<String> messages = new ArrayList<String>();
 			messages.add("不正なパラメーターでアクセスされました");
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("users");
-		}else{
-			List<Branch> branches = new BranchService().getBranch();
-			request.setAttribute("branches",  branches);
+		}else {
+			String patternC = "^[\\d]+$" ;
+			if (!Pattern.compile(patternC).matcher(request.getParameter("id")).find()){
+				System.out.println(request.getParameter("id"));
+				HttpSession session = request.getSession();
+				List<String> messages = new ArrayList<String>();
+				messages.add("不正なパラメーターでアクセスされました");
+				session.setAttribute("errorMessages", messages);
+				response.sendRedirect("users");
+			}else{
+				Integer ID = Integer.parseInt(request.getParameter("id"));
+				List<IndexUser> editUser = new UserService().getShowUser(ID);
+				if (editUser.size() == 0) {
+					HttpSession session = request.getSession();
+					List<String> messages = new ArrayList<String>();
+					messages.add("不正なパラメーターでアクセスされました");
+					session.setAttribute("errorMessages", messages);
+					response.sendRedirect("users");
+				}else{
+					List<Branch> branches = new BranchService().getBranch();
+					request.setAttribute("branches",  branches);
 
-			List<Position> positions = new PositionService().getPosition();
-			request.setAttribute("positions", positions);
+					List<Position> positions = new PositionService().getPosition();
+					request.setAttribute("positions", positions);
 
-			request.setAttribute("editUser", editUser.get(0));
-			request.getRequestDispatcher("EditUser.jsp").forward(request, response);
+					request.setAttribute("editUser", editUser.get(0));
+					request.getRequestDispatcher("EditUser.jsp").forward(request, response);
+				}
+			}
 		}
 	}
 

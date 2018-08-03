@@ -17,6 +17,7 @@
 	<body>
 		<div class="container">
 			<h1 style="margin-top: 30px;">新規ユーザー登録</h1>
+			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
 			<a href="users">戻る</a>
 
