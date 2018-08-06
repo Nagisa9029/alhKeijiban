@@ -87,7 +87,7 @@ public class IndexUserDao {
 		}
 	}
 
-	public List<IndexUser> getShowUser(Connection connection, int id) {
+	public List<IndexUser> getShowUser(Connection connection, Long iD) {
 
 		PreparedStatement ps = null;
 		try {
@@ -110,7 +110,7 @@ public class IndexUserDao {
 			sql.append("ON users.branch_id = branches.id ");
 			sql.append("INNER JOIN positions ");
 			sql.append("ON users.position_id = positions.id ");
-			sql.append("WHERE users.id = " + id);
+			sql.append("WHERE users.id = " + iD);
 
 			ps = connection.prepareStatement(sql.toString());
 

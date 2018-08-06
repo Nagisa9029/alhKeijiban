@@ -35,7 +35,16 @@
 	<body>
 	<div class="top-box"></div>
 		<div class="container">
-			<h1 style="margin-top: 30px;">管理画面 / ユーザー一覧</h1>
+		<a href="./">戻る</a>
+		<div class="row">
+				<div class="col-xs-3">
+					<h1 style="margin-top: 30px;">管理画面 / ユーザー一覧</h1>
+				</div>
+				<div class="col-xs-6"></div>
+				<div class="col-xs-3" style="position: absolute; right: 150px; top: 230px;">
+					<li><label>ユーザー名：</label>${loginUser.name}</li>
+				</div>
+			</div>
 			<br>
 
 

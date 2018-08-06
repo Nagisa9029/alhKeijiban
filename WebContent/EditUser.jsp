@@ -11,14 +11,40 @@
 		<title>ユーザー編集</title>
 	</head>
 
+	<header>
+
 	<c:import url="header.jsp" />
 
+	<div class="header-bottom">
+		<nav style="position: absolute;">
+			<ul class="nav-list">
+				<a href="./"><img src="./fonts/home.png" width="15"> HOME　</a>
+				<img src="./fonts/right.png" width="10"><a href="users">　管理画面　</a>
+				<img src="./fonts/right.png" width="10">　ユーザー編集
+			</ul>
+		</nav>
+		<nav style="text-align: right;">
+			<ul class="nav-list">
+				<li class="nav-list-item"><a href="logout"><img src="./fonts/logout.png" width="20"> Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+	</header>
+
 	<body>
+		<div class="top-box"></div>
 		<div class="container">
-			<h1 style="margin-top: 30px;">ユーザー情報編集</h1>
-			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
+			<a href="./users">戻る</a>
+			<div class="row">
+				<div class="col-xs-3">
+					<h1 style="margin-top: 30px;">ユーザー情報編集</h1>
+				</div>
+				<div class="col-xs-6"></div>
+				<div class="col-xs-3" style="position: absolute; right: 150px; top: 230px;">
+					<li><label>ユーザー名：</label>${loginUser.name}</li>
+				</div>
+			</div>
 			<hr>
-			<a href="./">戻る</a>
 
 			<div class="main-contents">
 

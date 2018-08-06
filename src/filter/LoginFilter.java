@@ -1,6 +1,8 @@
 package filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,6 +27,9 @@ public class LoginFilter implements Filter{
 		if(loginUser != null){
 			chain.doFilter(request, response);
 		}else{
+			List<String> messages = new ArrayList<String>();
+			messages.add("IDとパスワードでログインしてください");
+			session.setAttribute("errorMessages", messages);
 			((HttpServletResponse) response).sendRedirect("login");
 		}
 	}

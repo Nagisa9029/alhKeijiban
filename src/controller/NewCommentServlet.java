@@ -42,7 +42,8 @@ public class NewCommentServlet extends HttpServlet {
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("top.jsp");
+			request.getRequestDispatcher("top.jsp").forward(request, response);
+			//response.sendRedirect("top.jsp");
 		}
 	}
 

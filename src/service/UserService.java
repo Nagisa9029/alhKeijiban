@@ -86,14 +86,14 @@ public class UserService {
 		}
 	}
 
-	public List<IndexUser> getShowUser(int userId) {
+	public List<IndexUser> getShowUser(Long iD) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			IndexUserDao userDao = new IndexUserDao();
-			List<IndexUser> ret = userDao.getShowUser(connection, userId);
+			List<IndexUser> ret = userDao.getShowUser(connection, iD);
 
 			commit(connection);
 

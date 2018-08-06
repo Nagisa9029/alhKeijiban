@@ -42,8 +42,16 @@
 	<body>
 	<div class="top-box"></div>
 		<div class="container">
-
-			<h1 style="margin-top: 30px;">掲示板</h1>
+			<br />
+			<div class="row">
+				<div class="col-xs-3">
+					<h1 style="margin-top: 30px;">掲示板</h1>
+				</div>
+				<div class="col-xs-6"></div>
+				<div class="col-xs-3" style="position: absolute; right: 150px; top: 230px;">
+					<li><label>ユーザー名：</label>${loginUser.name}</li>
+				</div>
+			</div>
 			<hr>
 
 			<div class="main-contents">
@@ -129,7 +137,7 @@
 							<!-- コメント投稿 -->
 							<div class="form-area">
 								<form action="NewComment" method="post" >
-									<textarea name="text" cols="100" rows="5" class="tweet-box" required="true"></textarea><br />
+									<textarea name="text" cols="100" rows="5" class="tweet-box" required="true">${comment.text}</textarea><br />
 									<input type="hidden" name="post" value="${post.id}" />
 									<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）
 								</form>

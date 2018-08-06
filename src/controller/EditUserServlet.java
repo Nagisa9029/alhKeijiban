@@ -47,7 +47,7 @@ public class EditUserServlet extends HttpServlet {
 				session.setAttribute("errorMessages", messages);
 				response.sendRedirect("users");
 			}else{
-				Integer ID = Integer.parseInt(request.getParameter("id"));
+				Long ID = Long.parseLong(request.getParameter("id"));
 				List<IndexUser> editUser = new UserService().getShowUser(ID);
 				if (editUser.size() == 0) {
 					HttpSession session = request.getSession();

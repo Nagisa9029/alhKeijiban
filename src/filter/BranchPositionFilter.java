@@ -1,6 +1,8 @@
 package filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,9 +28,16 @@ public class BranchPositionFilter implements Filter{
 			if (loginUser.getBranchId() == 1 && loginUser.getPositionId() == 1){
 				chain.doFilter(request, response);
 			}else{
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				List<String> messages = new ArrayList<String>();
+				messages.add("権限のないIDでアクセスされました");
+				session.setAttribute("errorMessages", messages);
+				((HttpServletResponse) response).sendRedirect("./");
+				//request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}else{
+			List<String> messages = new ArrayList<String>();
+			messages.add("IDとパスワードでログインしてください");
+			session.setAttribute("errorMessages", messages);
 			((HttpServletResponse) response).sendRedirect("login");
 		}
 	}
