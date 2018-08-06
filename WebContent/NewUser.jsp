@@ -12,14 +12,31 @@
 		<title>ユーザー登録</title>
 	</head>
 
+	<header>
+
 	<c:import url="header.jsp" />
 
+	<div class="header-bottom">
+		<nav style="position: absolute;">
+			<ul class="nav-list">
+				<a href="./"><img src="./fonts/home.png" width="15"> HOME　</a>
+				<img src="./fonts/right.png" width="10"><a href="users">　管理画面　</a>
+				<img src="./fonts/right.png" width="10">　新規ユーザー登録
+			</ul>
+		</nav>
+		<nav style="text-align: right;">
+			<ul class="nav-list">
+				<li class="nav-list-item"><a href="logout"><img src="./fonts/logout.png" width="20"> Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+	</header>
+
 	<body>
+	<div class="top-box"></div>
 		<div class="container">
 			<h1 style="margin-top: 30px;">新規ユーザー登録</h1>
-			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
-			<a href="users">戻る</a>
 
 			<div class="main-contents">
 

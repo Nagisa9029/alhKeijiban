@@ -8,12 +8,39 @@
 a{
 	text-decoration: none;
 }
-.errorMessages{
+.errorMessages > ul > li{
 	color: red;
 }
-header {
+header{
+	width: 100%;
+	position: fixed; /* ヘッダーを固定(これが重要) */
+	top: 0; /* 固定する位置 */
+	left: 0; /* 固定する位置 */
+	right: 0;  /* 固定する位置 */
+}
+.header-top {
 	background-color: #808000;
 	height: 100px;
+	width: 100%;
+	text-decoration: none;
+	font-size: 70px;
+}
+.header-bottom{
+	padding: 0 80px 0 100px;
+	background: rgba( 0, 0, 0, 0.1);
+}
+.nav-list{
+	etxt-align: center;
+	padding: 10px;
+	margin: 0 auto;
+}
+.nav-list-item{
+	list-style: none;
+	display: inline-block;
+	margin: 0 20px;
+}
+.top-box{
+	height: 150px;
 }
 .login-box{
 	width: 70%;
@@ -26,7 +53,7 @@ header {
 }
 .box-post{
   //background-image: url(fonts/keijiban.jpg);
-  background-color: #FFFFCC;
+  background-color: #CCFFFF;
   margin: 2em 0;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.22);
   border-radius: 10px;
@@ -38,6 +65,9 @@ header {
   padding: 0 10px;
   margin: 0;
 }
+.comments{
+	padding: 0 50px 0 50px;
+}
 footer {
 	margin-top: 100px;
 	height: 150px;
@@ -47,4 +77,46 @@ footer {
 	color: white;
 	padding-top: 70px;
 	text-align: center;
+}
+.grad-btn {
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+          transition: all 0.3s;
+  //border: 1px solid #ddd;
+  margin: 7px 0 10px 10px;
+  overflow: hidden;
+  //font-size: 18px;
+  //background-color: red;
+  color: #0000CD;
+}
+.grad-btn::before {
+  //content: "続きを読む"
+}
+.grad-item {
+  position: relative;
+  overflow: hidden;
+  height: 0px; /*隠した状態の高さ*/
+}
+.grad-item::before {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+ // height: 40px; /*グラデーションで隠す高さ*/
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.9) 50%, #fff 100%);
+  background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.9) 50%, #fff 100%);
+  content: "";
+}
+.grad-trigger {
+  display: none; /*チェックボックスは常に非表示*/
+}
+.grad-trigger:checked ~ .grad-btn::before {
+  //content: "閉じる" /*チェックされていたら、文言を変更する*/
+}
+.grad-trigger:checked ~ .grad-item {
+  height: auto; /*チェックされていたら、高さを戻す*/
+}
+.grad-trigger:checked ~ .grad-item::before {
+  display: none; /*チェックされていたら、grad-itemのbeforeを非表示にする*/
 }

@@ -9,23 +9,37 @@
 		<link href="./css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="./js/jQuery.min.js"></script>
 		<script type="text/javascript" src="./js/app.js"></script>
-		<title>ユーザー一覧</title>
+		<title>管理画面（ユーザー一覧）</title>
 	</head>
+
+	<header>
 
 	<c:import url="header.jsp" />
 
+	<div class="header-bottom">
+		<nav style="position: absolute;">
+			<ul class="nav-list">
+				<a href="./"><img src="./fonts/home.png" width="15"> HOME　</a>
+				<img src="./fonts/right.png" width="10">　管理画面
+			</ul>
+		</nav>
+		<nav style="text-align: right;">
+			<ul class="nav-list">
+				<li class="nav-list-item"><a href="newuser"><img src="./fonts/user.png" width="20"> ユーザー新規登録</a></li>
+				<li class="nav-list-item"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></li>
+			</ul>
+		</nav>
+	</div>
+	</header>
+
 	<body>
+	<div class="top-box"></div>
 		<div class="container">
-			<h1 style="margin-top: 30px;">ユーザー一覧</h1>
-			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
-			<hr>
-			<a href="./">戻る</a>
+			<h1 style="margin-top: 30px;">管理画面 / ユーザー一覧</h1>
+			<br>
+
 
 			<div class="main-contents">
-				<div class="header">
-					<a href="newuser">ユーザー新規登録</a>
-				</div>
-
 
 				<!-- エラーメッセージ -->
 				<c:if test="${ not empty errorMessages }">
@@ -42,7 +56,7 @@
 				<div class="Users">
 
 					<table class="table table-hover table-condensed">
-						<thead>
+						<thead style="background-color: #CCFFFF;">
 							<tr>
 								<th>名前</th>
 								<th>ログインID</th>

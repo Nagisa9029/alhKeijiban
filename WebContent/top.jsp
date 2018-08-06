@@ -13,37 +13,48 @@
 		<title>掲示板</title>
 	</head>
 
+	<header>
+
 	<c:import url="header.jsp" />
 
+	<div class="header-bottom">
+		<nav style="position: absolute;">
+			<ul class="nav-list">
+				<a href="./"><img src="./fonts/home.png" width="15"> HOME</a>
+			</ul>
+		</nav>
+		<nav style="text-align: right;">
+			<ul class="nav-list">
+				<c:if test="${loginUser.positionId != 1 }">
+					<li class="nav-list-item"><a href="newpost"><img src="./fonts/post.png" width="20"> 新規投稿</a></li>
+					<li class="nav-list-item"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></li>
+				</c:if>
+				<c:if test="${loginUser.positionId == 1 }">
+					<li class="nav-list-item"><a href="newpost"><img src="./fonts/post.png" width="20"> 新規投稿</a></li>
+					<li class="nav-list-item"><a href="users"><img src="./fonts/account.png" width="20"> 管理画面</a></li>
+					<li class="nav-list-item"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
+	</header>
+
 	<body>
+	<div class="top-box"></div>
 		<div class="container">
 
-			<img src="./fonts/home.png" width="20"><span style="font-size: 20px; padding-top: 10px 0 0 10px;"><a href="./">ホーム</a></span>
-
-
 			<h1 style="margin-top: 30px;">掲示板</h1>
-			<div style="position: absolute; right: 100px; font-size: 30px;"><a href="logout"><img src="./fonts/logout.png" width="20"> logout</a></div>
 			<hr>
 
 			<div class="main-contents">
-				<div class="header">
-					<c:if test="${loginUser.positionId != 1 }">
-						<a href="newpost">新規投稿</a>
-					</c:if>
-					<c:if test="${loginUser.positionId == 1 }">
-						<a href="newpost">新規投稿</a>
-						<a href="users">管理画面</a>
-					</c:if>
-				</div>
-				<hr>
 
 				<form action="./" method="get">
+					<label for="cate">日付での絞り込み：</label>
 					<input type="date" name="dateStr" value="${dateStr}" />～<input type="date" name="dateEnd" value="${dateEnd}" /><br />
-					<label for="cate">カテゴリー</label>
+					<label for="cate">カテゴリー検索　：</label>
 					<input name="cate" id="cate" value="${cate}" /> <br />
-					<input type="submit" value="検索">
+					<input type="submit" value="　検索　">
 				</form>
-				<hr>
 				<hr>
 
 				<!-- エラーメッセージ -->
@@ -82,22 +93,38 @@
 							<hr>
 							<hr>
 
-							<!-- コメント一覧 -->
+
+							<% int total = 0; %>
 							<c:forEach items="${comments}" var="comment">
 								<c:if test="${post.id == comment.postId}">
-									<div class="comment">
-										<c:if test="${loginUser.id == comment.userId}">
-											<form action="DeleteComment" method="post" onSubmit="return destroy()">
-												<input type="hidden" name="id" value="${comment.id}" />
-												<input type="submit" value="コメント削除">
-											</form>
-										</c:if>
-										<c:out value="${comment.name}" />
-										<pre><c:out value="${comment.text}" /></pre>
-									</div>
-									<hr>
+									<% total = total + 1; %>
 								</c:if>
 							</c:forEach>
+
+							<!-- コメント一覧 -->
+							<div class="grad-wrap">
+							<input id="${post.id}" class="grad-trigger" type="checkbox">
+							<label class="grad-btn" for="${post.id}">コメント <%= total %> 件</label>
+
+
+								<div class="grad-item" style="padding: 0 50px 0 50px;">
+									<c:forEach items="${comments}" var="comment">
+										<c:if test="${post.id == comment.postId}">
+											<div class="comment">
+												<c:if test="${loginUser.id == comment.userId}">
+													<form action="DeleteComment" method="post" onSubmit="return destroy()">
+														<input type="hidden" name="id" value="${comment.id}" />
+														<input type="submit" value="コメント削除">
+													</form>
+												</c:if>
+												<c:out value="${comment.name}" />
+												<pre><c:out value="${comment.text}" /></pre>
+											</div>
+											<hr>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
 
 							<!-- コメント投稿 -->
 							<div class="form-area">

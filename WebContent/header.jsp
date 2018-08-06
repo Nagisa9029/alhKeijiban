@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<header>
-	<a href="./"><div style="position: absolute; text-decoration: none; left: 100px; font-size: 70px; color: black;">Test Forum</div></a>
-</header>
+<div class="header-top">
+	<a href="./"><div style="margin-left: 100px; text-decoration: none; color: white;">Test Forum</div></a>
+</div>
