@@ -85,9 +85,30 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE account = ? AND password = ?";
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT ");
+			sql.append("users.id, ");
+			sql.append("users.name, ");
+			sql.append("users.account, ");
+			sql.append("users.password, ");
+			sql.append("users.is_stopped, ");
+			sql.append("users.branch_id, ");
+			sql.append("branches.name, ");
+			sql.append("users.position_id, ");
+			sql.append("positions.name, ");
+			sql.append("users.created_date, ");
+			sql.append("users.updated_date ");
+			sql.append("FROM users ");
+			sql.append("INNER JOIN branches ");
+			sql.append("ON users.branch_id = branches.id ");
+			sql.append("INNER JOIN positions ");
+			sql.append("ON users.position_id = positions.id ");
+			sql.append("WHERE users.account = ? AND users.password = ?; ");
 
-			ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql.toString());
+			//String sql = "SELECT * FROM users WHERE account = ? AND password = ?";
+
+			//ps = connection.prepareStatement(sql);
 			ps.setString(1, account);
 			ps.setString(2, password);
 
@@ -119,6 +140,8 @@ public class UserDao {
 				int isStopped = rs.getInt("is_stopped");
 				int branchId = rs.getInt("branch_id");
 				int positionId = rs.getInt("position_id");
+				String branch = rs.getString("branches.name");
+				String position = rs.getString("positions.name");
 				Timestamp createdDate = rs.getTimestamp("created_date");
 				Timestamp updatedDate = rs.getTimestamp("updated_date");
 
@@ -130,6 +153,8 @@ public class UserDao {
 				user.setIsStopped(isStopped);
 				user.setBranchId(branchId);
 				user.setPositionId(positionId);
+				user.setBranchName(branch);
+				user.setPositionName(position);
 				user.setCreatedDate(createdDate);
 				user.setUpdatedDate(updatedDate);
 

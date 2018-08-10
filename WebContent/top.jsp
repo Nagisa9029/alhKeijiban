@@ -48,7 +48,8 @@
 					<h1 style="margin-top: 30px;">掲示板</h1>
 				</div>
 				<div class="col-xs-6"></div>
-				<div class="col-xs-3" style="position: absolute; right: 150px; top: 230px;">
+				<div class="col-xs-3" style="position: absolute; right: 150px; top: 210px;">
+					<li><label>所属部署：</label>${loginUser.branchName }　${loginUser.positionName}</li>
 					<li><label>ユーザー名：</label>${loginUser.name}</li>
 				</div>
 			</div>
