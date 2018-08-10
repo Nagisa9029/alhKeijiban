@@ -81,8 +81,7 @@ public class UserDao {
 		}
 	}
 
-	public User getUser(Connection connection, String account,
-			String password) {
+	public User getUser(Connection connection, String account, String password) {
 
 		PreparedStatement ps = null;
 		try {

@@ -65,6 +65,11 @@ public class NewPostServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String text = request.getParameter("text");
 		String category = request.getParameter("category");
+		String[] str = text.split("\r\n");
+		int sub = 0;
+		for(int i = 0; i < str.length; i ++){
+			sub += str[i].length();
+		}
 
 		if (StringUtils.isBlank(title) == true) {
 			messages.add("タイトルを入力してください");
@@ -81,7 +86,7 @@ public class NewPostServlet extends HttpServlet {
 		if (StringUtils.isBlank(text) == true) {
 			messages.add("本文を入力してください");
 		}
-		if (1000 < text.length()) {
+		if (1000 < sub) {
 			messages.add("本文は1000文字以下で入力してください");
 		}
 

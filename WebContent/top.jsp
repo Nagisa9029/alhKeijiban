@@ -136,7 +136,10 @@
 
 							<!-- コメント投稿 -->
 							<div class="form-area">
-								<form action="NewComment" method="post" >
+								<form action="./" method="post" >
+									<input type="hidden" name="dateStr" value="${dateStr}" />
+									<input type="hidden" name="dateEnd" value="${dateEnd}" />
+									<input type="hidden" name="cate" value="${cate}" />
 									<textarea name="text" cols="100" rows="5" class="tweet-box" required="true">${comment.text}</textarea><br />
 									<input type="hidden" name="post" value="${post.id}" />
 									<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）

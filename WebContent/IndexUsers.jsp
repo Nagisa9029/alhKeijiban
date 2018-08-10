@@ -71,22 +71,35 @@
 								<th>ログインID</th>
 								<th>支店</th>
 								<th>部署・役職</th>
-								<th></th>
-								<th>アカウント状況</th>
+								<th>投稿件数</th>
+								<th>アカウント状況変更</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${users}" var="user">
+								<% int postTotal = 0; %>
+								<c:forEach items="${posts}" var="post">
+									<c:if test="${user.id == post.userId}">
+										<% postTotal += 1; %>
+									</c:if>
+								</c:forEach>
+								<% int commentTotal = 0; %>
+								<c:forEach items="${comments}" var="comment">
+									<c:if test="${user.id == comment.userId}">
+										<% commentTotal += 1; %>
+									</c:if>
+								</c:forEach>
+
 								<tr>
-									<!--<c:out value="${user.id}" />-->
 									<td><a href="edit?id=${user.id}">
 										<c:out value="${user.name}" /></a>
 									</td>
 									<td><c:out value="${user.account}" /></td>
-									<!--<c:out value="${user.password}" />-->
 									<td><c:out value="${user.branchName}" /></td>
 									<td><c:out value="${user.positionName}" /></td>
-									<td><c:out value="${user.createdDate}" /></td>
+									<td>投　稿　数：<%= postTotal %> 件<br />
+										コメント数：<%= commentTotal %> 件
+									</td>
 									<td>
 										<c:choose>
 											<c:when test="${ user.id == loginUser.id }">
