@@ -27,12 +27,13 @@ public class IndexUserServlet extends HttpServlet {
 
 		String dateStr = "2018-01-01";
 		String dateEnd = "2020-12-31";
-		String cate= null;
+		String cate = null;
+		String bran = null;
 
 		List<IndexUser> users = new UserService().getUser();
 		request.setAttribute("users", users);
 
-		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate);
+		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate, bran);
 		request.setAttribute("posts", posts);
 
 		List<UserComment> comments = new CommentService().getComment();

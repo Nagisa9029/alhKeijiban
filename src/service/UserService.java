@@ -109,12 +109,33 @@ public class UserService {
 		}
 	}
 
+	public void loginCreate(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			userDao.loginCreate(connection, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
 	public void update(User user) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			System.out.println(user.getPassword());
 
 			if (user.getPassword().length() ==0 ){
 				user.setPassword(null);

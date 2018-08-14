@@ -29,8 +29,8 @@ public class IndexUserDao {
 			sql.append("users.branch_id, ");
 			sql.append("branches.name, ");
 			sql.append("users.position_id, ");
-			sql.append("positions.name ");
-			//sql.append("users.created_date");
+			sql.append("positions.name, ");
+			sql.append("users.login_date ");
 			sql.append("FROM users ");
 			sql.append("INNER JOIN branches ");
 			sql.append("ON users.branch_id = branches.id ");
@@ -65,7 +65,7 @@ public class IndexUserDao {
 				int positionId = rs.getInt("users.position_id");
 				String branch = rs.getString("branches.name");
 				String position = rs.getString("positions.name");
-				//Timestamp createdDate = rs.getTimestamp("users.created_date");
+				Timestamp loginDate = rs.getTimestamp("users.login_date");
 
 				IndexUser user = new IndexUser();
 				user.setId(id);
@@ -77,7 +77,7 @@ public class IndexUserDao {
 				user.setPositionId(positionId);
 				user.setBranchName(branch);
 				user.setPositionName(position);
-				//user.setCreatedDate(createdDate);
+				user.setLoginDate(loginDate);
 
 				ret.add(user);
 			}

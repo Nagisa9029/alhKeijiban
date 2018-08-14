@@ -38,6 +38,8 @@ public class NewCommentServlet extends HttpServlet {
 			Comment comment = new Comment();
 			comment.setText(request.getParameter("text"));
 			comment.setUserId(user.getId());
+			comment.setBranchName(user.getBranchName());
+			comment.setPositionName(user.getPositionName());
 			comment.setPostId(Integer.parseInt(request.getParameter("post")));
 
 			new CommentService().register(comment);
@@ -50,7 +52,8 @@ public class NewCommentServlet extends HttpServlet {
 			comment.setPostId(Integer.parseInt(request.getParameter("post")));
 			String dateStr = null;
 			String dateEnd = null;
-			String cate= null;
+			String cate = null;
+			String bran = null;
 
 			if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
 				dateStr = "2018-01-01";
@@ -70,7 +73,7 @@ public class NewCommentServlet extends HttpServlet {
 				request.setAttribute("cate", cate);
 			}
 
-			List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate);
+			List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate, bran);
 			request.setAttribute("posts", posts);
 
 			List<UserComment> comments = new CommentService().getComment();

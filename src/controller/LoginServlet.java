@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 import service.LoginService;
+import service.UserService;
 
 @WebServlet(urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -38,8 +39,10 @@ public class LoginServlet extends HttpServlet {
 
 			LoginService loginService = new LoginService();
 			User user = loginService.login(account, password);
-
 			session.setAttribute("loginUser", user);
+			//post.setUserId(user.getId());
+			new UserService().loginCreate(user.getId());
+
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);

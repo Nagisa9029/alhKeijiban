@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String title;
 	private String text;
@@ -13,6 +13,9 @@ public class Post implements Serializable {
 	private int userId;
 	private Date createdDate;
 	private Date updatedDate;
+	private String branchName;
+	private String positionName;
+
 	public int getId() {
 		return id;
 	}
@@ -55,6 +58,18 @@ public class Post implements Serializable {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getPositionName() {
+		return positionName;
+	}
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
 
 }

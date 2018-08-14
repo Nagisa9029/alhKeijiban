@@ -57,6 +57,8 @@ public class NewPostServlet extends HttpServlet {
 		post.setText(request.getParameter("text"));
 		post.setCategory(request.getParameter("category"));
 		post.setUserId(user.getId());
+		post.setBranchName(user.getBranchName());
+		post.setPositionName(user.getPositionName());
 		return post;
 	}
 

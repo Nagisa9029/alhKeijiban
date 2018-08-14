@@ -15,7 +15,7 @@ import exception.SQLRuntimeException;
 
 public class UserPostDao {
 
-	public List<UserPost> getUserPosts(Connection connection, String dateStr, String dateEnd, String category, int num) {
+	public List<UserPost> getUserPosts(Connection connection, String dateStr, String dateEnd, String category, String branch, int num) {
 
 		PreparedStatement ps = null;
 		try {
@@ -26,15 +26,21 @@ public class UserPostDao {
 			sql.append("posts.title, ");
 			sql.append("posts.text, ");
 			sql.append("posts.category, ");
+			sql.append("posts.branch_name, ");
+			sql.append("posts.position_name, ");
 			sql.append("users.name, ");
 			sql.append("posts.created_date ");
 			sql.append("FROM posts ");
 			sql.append("INNER JOIN users ");
 			sql.append("ON posts.user_id = users.id ");
-			if (category == null ) {
+			if (category == null && branch == null) {
 				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59'" );
-			} else {
+			} else if (category != null && branch == null){
 				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59' AND posts.category LIKE '%" + category + "%' ");
+			} else if (category == null && branch != null){
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59' AND posts.branch_name LIKE '%" + branch + "%' ");
+			} else {
+				sql.append("WHERE posts.created_date BETWEEN '" + dateStr + " 00:00:00' AND '" + dateEnd + " 23:59:59' AND posts.category LIKE '%" + category + "%' AND posts.branch_name LIKE '%" + branch + "%' ");
 			}
 			sql.append("ORDER BY created_date DESC limit " + num);
 
@@ -62,6 +68,8 @@ public class UserPostDao {
 				String title = rs.getString("posts.title");
 				String text = rs.getString("posts.text");
 				String category = rs.getString("posts.category");
+				String branchName = rs.getString("posts.branch_name");
+				String positionName = rs.getString("posts.position_name");
 				Timestamp createdDate = rs.getTimestamp("posts.created_date");
 
 				UserPost post = new UserPost();
@@ -71,6 +79,8 @@ public class UserPostDao {
 				post.setTitle(title);
 				post.setText(text);
 				post.setCategory(category);
+				post.setBranchName(branchName);
+				post.setPositionName(positionName);
 				post.setCreatedDate(createdDate);
 
 				ret.add(post);

@@ -20,12 +20,16 @@ public class CommentDao {
 			sql.append("text, ");
 			sql.append("user_id, ");
 			sql.append("post_id, ");
+			sql.append("branch_name, ");
+			sql.append("position_name, ");
 			sql.append("created_date, ");
 			sql.append("updated_date");
 			sql.append(") VALUES (");
 			sql.append("?, ");//text
 			sql.append("?, ");//user_id
-			sql.append("?, ");//post//id
+			sql.append("?, ");//post_id
+			sql.append("?, ");//branch_name
+			sql.append("?, ");//position_name
 			sql.append("CURRENT_TIMESTAMP, ");//created_date
 			sql.append("CURRENT_TIMESTAMP");//updated_date
 			sql.append(")");
@@ -35,6 +39,8 @@ public class CommentDao {
 			ps.setString(1, comment.getText());
 			ps.setInt(2, comment.getUserId());
 			ps.setInt(3, comment.getPostId());
+			ps.setString(4, comment.getBranchName());
+			ps.setString(5, comment.getPositionName());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

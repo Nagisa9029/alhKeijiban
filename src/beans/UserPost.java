@@ -12,6 +12,8 @@ public class UserPost implements Serializable {
 	private String text;
 	private String category;
 	private int userId;
+	private String branchName;
+	private String positionName;
 	private Date createdDate;
 
 	public int getId() {
@@ -55,5 +57,17 @@ public class UserPost implements Serializable {
 	}
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getPositionName() {
+		return positionName;
+	}
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
 }

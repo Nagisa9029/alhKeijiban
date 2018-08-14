@@ -13,10 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import beans.Branch;
 import beans.Comment;
 import beans.User;
 import beans.UserComment;
 import beans.UserPost;
+import service.BranchService;
 import service.CommentService;
 import service.PostService;
 
@@ -28,15 +30,19 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		String dateStr = null;
-		String dateEnd = null;
-		String cate= null;
+		String dateStr = "2018-01-01";
+		String dateEnd = "2020-12-31";
+		String cate = null;
+		String bran = null;
 
-		if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
+		List<UserPost> popos = new PostService().getPost(dateStr, dateEnd, cate, bran);
+		request.setAttribute("popos", popos);
+
+		/*if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
 			dateStr = "2018-01-01";
 			dateEnd = "2020-12-31";
 			//cate = null;
-		}
+		}*/
 		if (StringUtils.isBlank(request.getParameter("dateStr")) != true) {
 			dateStr = request.getParameter("dateStr");
 			request.setAttribute("dateStr", dateStr);
@@ -45,17 +51,28 @@ public class TopServlet extends HttpServlet {
 			dateEnd = request.getParameter("dateEnd");
 			request.setAttribute("dateEnd", dateEnd);
 		}
-		if (request.getParameter("cate") != null) {
+		/*if (request.getParameter("cate") != null) {
+			cate = request.getParameter("cate");
+			request.setAttribute("cate", cate);
+		}*/
+		if (StringUtils.isBlank(request.getParameter("cate")) != true){
 			cate = request.getParameter("cate");
 			request.setAttribute("cate", cate);
 		}
+		if (StringUtils.isBlank(request.getParameter("bran")) != true){
+			bran = request.getParameter("bran");
+			request.setAttribute("bran", bran);
+		}
 
 
-		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate);
+		List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate, bran);
 		request.setAttribute("posts", posts);
 
 		List<UserComment> comments = new CommentService().getComment();
 		request.setAttribute("comments", comments);
+
+		List<Branch> branches = new BranchService().getBranch();
+		request.setAttribute("branches",  branches);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}
@@ -73,6 +90,8 @@ public class TopServlet extends HttpServlet {
 			Comment comment = new Comment();
 			comment.setText(request.getParameter("text"));
 			comment.setUserId(user.getId());
+			comment.setBranchName(user.getBranchName());
+			comment.setPositionName(user.getPositionName());
 			comment.setPostId(Integer.parseInt(request.getParameter("post")));
 
 			new CommentService().register(comment);
@@ -83,15 +102,15 @@ public class TopServlet extends HttpServlet {
 			Comment comment = new Comment();
 			comment.setText(request.getParameter("text"));
 			comment.setPostId(Integer.parseInt(request.getParameter("post")));
-			String dateStr = null;
-			String dateEnd = null;
+			request.setAttribute("comment", comment);
+			String dateStr = "2018-01-01";
+			String dateEnd = "2020-12-31";
 			String cate= null;
+			String bran = null;
 
-			if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
-				dateStr = "2018-01-01";
-				dateEnd = "2020-12-31";
-				//cate = null;
-			}
+			List<UserPost> popos = new PostService().getPost(dateStr, dateEnd, cate, bran);
+			request.setAttribute("popos", popos);
+
 			if (StringUtils.isBlank(request.getParameter("dateStr")) != true) {
 				dateStr = request.getParameter("dateStr");
 				request.setAttribute("dateStr", dateStr);
@@ -100,16 +119,23 @@ public class TopServlet extends HttpServlet {
 				dateEnd = request.getParameter("dateEnd");
 				request.setAttribute("dateEnd", dateEnd);
 			}
-			if (request.getParameter("cate") != null) {
+			if (StringUtils.isBlank(request.getParameter("cate")) != true){
 				cate = request.getParameter("cate");
 				request.setAttribute("cate", cate);
 			}
+			if (StringUtils.isBlank(request.getParameter("bran")) != true){
+				bran = request.getParameter("bran");
+				request.setAttribute("bran", bran);
+			}
 
-			List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate);
+			List<UserPost> posts = new PostService().getPost(dateStr, dateEnd, cate, bran);
 			request.setAttribute("posts", posts);
 
 			List<UserComment> comments = new CommentService().getComment();
 			request.setAttribute("comments", comments);
+
+			List<Branch> branches = new BranchService().getBranch();
+			request.setAttribute("branches",  branches);
 
 			request.getRequestDispatcher("top.jsp").forward(request, response);
 			//response.sendRedirect("top.jsp");

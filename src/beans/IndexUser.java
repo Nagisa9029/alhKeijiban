@@ -17,6 +17,7 @@ public class IndexUser implements Serializable {
 	private String positionName;
 	private Date createdDate;
 	private Date updatedDate;
+	private Date loginDate;
 
 
 	public int getId() {
@@ -84,5 +85,11 @@ public class IndexUser implements Serializable {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public Date getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
 	}
 }

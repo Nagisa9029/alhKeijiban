@@ -36,14 +36,14 @@ public class PostService {
 
 	private static final int LIMIT_NUM = 1000;
 
-	public List<UserPost> getPost(String dateStr, String dateEnd, String category) {
+	public List<UserPost> getPost(String dateStr, String dateEnd, String category, String branch) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserPostDao postDao = new UserPostDao();
-			List<UserPost> ret = postDao.getUserPosts(connection, dateStr, dateEnd, category, LIMIT_NUM);
+			List<UserPost> ret = postDao.getUserPosts(connection, dateStr, dateEnd, category, branch, LIMIT_NUM);
 
 			commit(connection);
 

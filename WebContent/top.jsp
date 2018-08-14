@@ -56,14 +56,53 @@
 			<hr>
 
 			<div class="main-contents">
+				<div class="row">
+					<div>
+						<form action="./" method="get">
+							<label for="cate">日付での絞り込み：</label>
+							<input type="date" name="dateStr" value="${dateStr}" /> ～ <input type="date" name="dateEnd" value="${dateEnd}" /><br />
+							<label for="cate">カテゴリー検索　：</label>
+							<input name="cate" id="cate" size="38" value="${cate}" /> <br />
+							<label for="cate">支店での絞り込み：</label>
+							<select name="bran">
+								<option></option>
+								<c:forEach items="${branches}" var="branch">
+									<c:if test="${bran == branch.name}">
+										<option value="${branch.name}" selected><c:out value="${branch.name}" /></option>
+									</c:if>
+									<c:if test="${bran != branch.name}">
+										<option value="${branch.name}"><c:out value="${branch.name}" /></option>
+									</c:if>
+								</c:forEach>
+							</select><br />
+							<input type="submit" value="　検索　">
+						</form>
+					</div>
 
-				<form action="./" method="get">
-					<label for="cate">日付での絞り込み：</label>
-					<input type="date" name="dateStr" value="${dateStr}" />～<input type="date" name="dateEnd" value="${dateEnd}" /><br />
-					<label for="cate">カテゴリー検索　：</label>
-					<input name="cate" id="cate" value="${cate}" /> <br />
-					<input type="submit" value="　検索　">
-				</form>
+
+					<% int h1 = 0; %><% int h2 = 0; %><% int h3 = 0; %><% int h4 = 0; %><% int h5 = 0; %>
+					<c:forEach items="${popos}" var="popo">
+						<c:if test="${popo.branchName == '本社'}"><% h1 = h1 + 1; %></c:if>
+						<c:if test="${popo.branchName == '支店A'}"><% h2 = h2 + 1; %></c:if>
+						<c:if test="${popo.branchName == '支店B'}"><% h3 = h3 + 1; %></c:if>
+						<c:if test="${popo.branchName == '支店C'}"><% h4 = h4 + 1; %></c:if>
+						<c:if test="${popo.branchName == '支店D'}"><% h5 = h5 + 1; %></c:if>
+					</c:forEach>
+
+					<div style="position: absolute; left: 1000px;">
+						<ul id="normal" class="dropmenu">
+							<li><a href="#">支店別投稿数</a>
+								<ul>
+									<li><a href="./?bran=本社">本社  <span class="badg"><%= h1 %></span> 件</a></li>
+									<li><a href="./?bran=支店A">支店A<span class="badg"><%= h2 %></span> 件</a></li>
+									<li><a href="./?bran=支店B">支店B<span class="badg"><%= h3 %></span> 件</a></li>
+									<li><a href="./?bran=支店C">支店C<span class="badg"><%= h4 %></span> 件</a></li>
+									<li><a href="./?bran=支店D">支店D<span class="badg"><%= h5 %></span> 件</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<hr>
 
 				<!-- エラーメッセージ -->
@@ -85,16 +124,37 @@
 
 						<!-- 投稿記事 -->
 						<div class="box-post">
-							<c:if test="${loginUser.id == post.userId}">
+							<c:choose>
+								<c:when test="${loginUser.id == post.userId}">
+									<form action="delete" method="post" onSubmit="return destroy()">
+										<input type="hidden" name="id" value="${post.id}" />
+										<input type="submit" value="投稿削除">
+									</form>
+								</c:when>
+								<c:when test="${loginUser.positionId == 2}">
+									<form action="delete" method="post" onSubmit="return destroy()">
+										<input type="hidden" name="id" value="${post.id}" />
+										<button type="submit" class="btn btn-warning">情報管理権限による削除</button>
+									</form>
+								</c:when>
+								<c:when test="${loginUser.branchId != 1 && loginUser.branchName == post.branchName}">
+									<form action="delete" method="post" onSubmit="return destroy()">
+										<input type="hidden" name="id" value="${post.id}" />
+										<button type="submit" class="btn btn-warning">店長権限による削除</button>
+									</form>
+								</c:when>
+							</c:choose>
+
+							<!--<c:if test="${loginUser.id == post.userId || loginUser.branchName == post.branchName || loginUser.positionId == 2}">
 								<form action="delete" method="post" onSubmit="return destroy()">
 									<input type="hidden" name="id" value="${post.id}" />
 									<input type="submit" value="投稿削除" >
 								</form>
-							</c:if>
+							</c:if>-->
 							<div class="box-title">
 								<span class="date"><fmt:formatDate value="${post.createdDate}" pattern="yyyy/MM/dd" /></span>
-								<span class="name"><c:out value="${post.name}" /></span>
 							</div>
+							<div>投稿者：<span>${post.branchName} ${post.positionName} / </span><span class="name"><c:out value="${post.name}" /></span></div>
 							<div class="title">タイトル：<c:out value="${post.title}" /></div>
 							<div class="category">カテゴリー：<c:out value="${post.category}" /></div>
 							<br />
@@ -120,13 +180,34 @@
 									<c:forEach items="${comments}" var="comment">
 										<c:if test="${post.id == comment.postId}">
 											<div class="comment">
-												<c:if test="${loginUser.id == comment.userId}">
+												<c:choose>
+													<c:when test="${loginUser.id == comment.userId}">
+														<form action="DeleteComment" method="post" onSubmit="return destroy()">
+															<input type="hidden" name="id" value="${comment.id}" />
+															<input type="submit" value="コメント削除">
+														</form>
+													</c:when>
+													<c:when test="${loginUser.positionId == 2}">
+														<form action="DeleteComment" method="post" onSubmit="return destroy()">
+															<input type="hidden" name="id" value="${comment.id}" />
+															<button type="submit" class="btn btn-warning">情報管理権限による削除</button>
+														</form>
+													</c:when>
+													<c:when test="${loginUser.branchId != 1 && loginUser.branchName == comment.branchName}">
+														<form action="DeleteComment" method="post" onSubmit="return destroy()">
+															<input type="hidden" name="id" value="${comment.id}" />
+															<button type="submit" class="btn btn-warning">店長権限による削除</button>
+														</form>
+													</c:when>
+												</c:choose>
+
+												<!--<c:if test="${loginUser.id == comment.userId || loginUser.branchName == comment.branchName}">
 													<form action="DeleteComment" method="post" onSubmit="return destroy()">
 														<input type="hidden" name="id" value="${comment.id}" />
 														<input type="submit" value="コメント削除">
 													</form>
-												</c:if>
-												<c:out value="${comment.name}" />
+												</c:if>-->
+												<div>投稿者：<span>${comment.branchName} ${comment.positionName} / </span><span class="name"><c:out value="${comment.name}" /></span></div>
 												<pre><c:out value="${comment.text}" /></pre>
 											</div>
 											<hr>
@@ -141,7 +222,7 @@
 									<input type="hidden" name="dateStr" value="${dateStr}" />
 									<input type="hidden" name="dateEnd" value="${dateEnd}" />
 									<input type="hidden" name="cate" value="${cate}" />
-									<textarea name="text" cols="100" rows="5" class="tweet-box" required="true">${comment.text}</textarea><br />
+									<textarea name="text" cols="129" rows="5" class="tweet-box" required="true"><c:if test="${post.id == comment.postId}">${comment.text}</c:if></textarea><br />
 									<input type="hidden" name="post" value="${post.id}" />
 									<button type="submit" class="btn btn-primary">コメント投稿</button>（500文字まで）
 								</form>

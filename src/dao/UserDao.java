@@ -38,6 +38,44 @@ public class UserDao {
 		}
 	}
 
+	private List<User> toUserList(ResultSet rs) throws SQLException {
+
+		List<User> ret = new ArrayList<User>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String account = rs.getString("account");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				int isStopped = rs.getInt("is_stopped");
+				int branchId = rs.getInt("branch_id");
+				int positionId = rs.getInt("position_id");
+				//String branch = rs.getString("branches.name");
+				//String position = rs.getString("positions.name");
+				Timestamp createdDate = rs.getTimestamp("created_date");
+				Timestamp updatedDate = rs.getTimestamp("updated_date");
+
+				User user = new User();
+				user.setId(id);
+				user.setAccount(account);
+				user.setName(name);
+				user.setPassword(password);
+				user.setIsStopped(isStopped);
+				user.setBranchId(branchId);
+				user.setPositionId(positionId);
+				//user.setBranchName(branch);
+				//user.setPositionName(position);
+				user.setCreatedDate(createdDate);
+				user.setUpdatedDate(updatedDate);
+
+				ret.add(user);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
 	public void insert(Connection connection, User user) {
 
 		PreparedStatement ps = null;
@@ -113,7 +151,7 @@ public class UserDao {
 			ps.setString(2, password);
 
 			ResultSet rs = ps.executeQuery();
-			List<User> userList = toUserList(rs);
+			List<User> userList = toUserList1(rs);
 			if (userList.isEmpty() == true) {
 				return null;
 			} else if (2 <= userList.size()) {
@@ -128,7 +166,7 @@ public class UserDao {
 		}
 	}
 
-	private List<User> toUserList(ResultSet rs) throws SQLException {
+	private List<User> toUserList1(ResultSet rs) throws SQLException {
 
 		List<User> ret = new ArrayList<User>();
 		try {
@@ -166,6 +204,25 @@ public class UserDao {
 		}
 	}
 
+	public void loginCreate(Connection connection, int id) {
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "UPDATE users SET login_date = CURRENT_TIMESTAMP WHERE id =" + id ;
+
+			ps = connection.prepareStatement(sql);
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public void update(Connection connection, User user) {
 
 		PreparedStatement ps = null;
@@ -180,7 +237,6 @@ public class UserDao {
 			if(user.getPassword() != null){
 				sql.append("password = ?, ");
 			}
-			System.out.println(user.getPassword());
 			sql.append("updated_date = CURRENT_TIMESTAMP ");
 			sql.append("WHERE ");
 			sql.append("id = ? ");
