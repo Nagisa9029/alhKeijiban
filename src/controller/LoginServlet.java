@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 			LoginService loginService = new LoginService();
 			User user = loginService.login(account, password);
 			session.setAttribute("loginUser", user);
-			//post.setUserId(user.getId());
+
 			new UserService().loginCreate(user.getId());
 
 			response.sendRedirect("./");

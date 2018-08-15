@@ -43,6 +43,7 @@ public class PostService {
 			connection = getConnection();
 
 			UserPostDao postDao = new UserPostDao();
+
 			List<UserPost> ret = postDao.getUserPosts(connection, dateStr, dateEnd, category, branch, LIMIT_NUM);
 
 			commit(connection);

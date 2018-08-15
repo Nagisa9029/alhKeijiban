@@ -35,14 +35,9 @@ public class TopServlet extends HttpServlet {
 		String cate = null;
 		String bran = null;
 
-		List<UserPost> popos = new PostService().getPost(dateStr, dateEnd, cate, bran);
-		request.setAttribute("popos", popos);
+		List<UserPost> branchNumbers = new PostService().getPost(dateStr, dateEnd, cate, bran);
+		request.setAttribute("branchNumbers", branchNumbers);
 
-		/*if (StringUtils.isBlank(request.getParameter("dateStr")) == true) {
-			dateStr = "2018-01-01";
-			dateEnd = "2020-12-31";
-			//cate = null;
-		}*/
 		if (StringUtils.isBlank(request.getParameter("dateStr")) != true) {
 			dateStr = request.getParameter("dateStr");
 			request.setAttribute("dateStr", dateStr);
@@ -51,10 +46,6 @@ public class TopServlet extends HttpServlet {
 			dateEnd = request.getParameter("dateEnd");
 			request.setAttribute("dateEnd", dateEnd);
 		}
-		/*if (request.getParameter("cate") != null) {
-			cate = request.getParameter("cate");
-			request.setAttribute("cate", cate);
-		}*/
 		if (StringUtils.isBlank(request.getParameter("cate")) != true){
 			cate = request.getParameter("cate");
 			request.setAttribute("cate", cate);
@@ -138,7 +129,7 @@ public class TopServlet extends HttpServlet {
 			request.setAttribute("branches",  branches);
 
 			request.getRequestDispatcher("top.jsp").forward(request, response);
-			//response.sendRedirect("top.jsp");
+
 		}
 	}
 

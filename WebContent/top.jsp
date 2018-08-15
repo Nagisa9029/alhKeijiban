@@ -81,12 +81,12 @@
 
 
 					<% int h1 = 0; %><% int h2 = 0; %><% int h3 = 0; %><% int h4 = 0; %><% int h5 = 0; %>
-					<c:forEach items="${popos}" var="popo">
-						<c:if test="${popo.branchName == '本社'}"><% h1 = h1 + 1; %></c:if>
-						<c:if test="${popo.branchName == '支店A'}"><% h2 = h2 + 1; %></c:if>
-						<c:if test="${popo.branchName == '支店B'}"><% h3 = h3 + 1; %></c:if>
-						<c:if test="${popo.branchName == '支店C'}"><% h4 = h4 + 1; %></c:if>
-						<c:if test="${popo.branchName == '支店D'}"><% h5 = h5 + 1; %></c:if>
+					<c:forEach items="${branchNumbers}" var="branchNumber">
+						<c:if test="${branchNumber.branchName == '本社'}"><% h1 = h1 + 1; %></c:if>
+						<c:if test="${branchNumber.branchName == '支店A'}"><% h2 = h2 + 1; %></c:if>
+						<c:if test="${branchNumber.branchName == '支店B'}"><% h3 = h3 + 1; %></c:if>
+						<c:if test="${branchNumber.branchName == '支店C'}"><% h4 = h4 + 1; %></c:if>
+						<c:if test="${branchNumber.branchName == '支店D'}"><% h5 = h5 + 1; %></c:if>
 					</c:forEach>
 
 					<div style="position: absolute; left: 1000px;">
